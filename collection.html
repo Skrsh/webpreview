@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&amp;family=Hanken+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}
+dialog:modal { overscroll-behavior: contain; }
+dialog::backdrop { overflow: hidden; overscroll-behavior: contain; }
+@keyframes slideInLeft { from { transform: translateX(-100%); } to { transform: translateX(0); } }
+@keyframes slideInRight { from { transform: translateX(100%); } to { transform: translateX(0); } }
+.drawer-slide-in { animation: slideInLeft 0.28s cubic-bezier(0.16, 1, 0.3, 1); }
+.filter-slide-in { animation: slideInRight 0.28s cubic-bezier(0.16, 1, 0.3, 1); }
+</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"outline-variant":"#d9c1c1","on-surface-variant":"#544343","outline":"#867273","secondary-fixed-dim":"#a5d0bc","error":"#ba1a1a","inverse-on-surface":"#f6f0ea","on-secondary-container":"#436a5a","inverse-primary":"#ffb3b6","on-secondary-fixed":"#002116","secondary-container":"#bee9d4","tertiary-container":"#322200","tertiary":"#170e00","secondary-fixed":"#c1ecd7","inverse-surface":"#32302d","on-primary-fixed-variant":"#763037","primary":"#2a0006","on-tertiary-fixed":"#261900","on-secondary-fixed-variant":"#274e3f","tertiary-fixed":"#ffdea5","on-secondary":"#ffffff","on-background":"#1d1b18","on-primary-fixed":"#3d040e","on-error":"#ffffff","surface-container-high":"#ede7e2","on-primary-container":"#ca7379","surface-container-low":"#f9f2ed","secondary":"#3f6656","on-tertiary":"#ffffff","on-surface":"#1d1b18","primary-fixed-dim":"#ffb3b6","surface-container":"#f3ede7","surface":"#fff8f3","primary-container":"#4a0e17","surface-dim":"#dfd9d4","background":"#fff8f3","on-error-container":"#93000a","on-tertiary-container":"#a98742","on-primary":"#ffffff","tertiary-fixed-dim":"#e9c176","surface-container-highest":"#e7e1dc","surface-tint":"#93474d","error-container":"#ffdad6","primary-fixed":"#ffdada","surface-bright":"#fff8f3","on-tertiary-fixed-variant":"#5d4201","surface-variant":"#e7e1dc"},borderRadius:{DEFAULT:"0.25rem",lg:"0.5rem",xl:"0.75rem",full:"9999px"},spacing:{margin:"3rem","space-xs":"0.25rem","space-sm":"0.5rem","margin-mobile":"1.25rem","space-xl":"3rem","space-lg":"1.75rem","gutter-mobile":"1rem",gutter:"1.5rem","space-md":"1rem"},fontFamily:{"display-md":["Playfair Display"],"label-sm":["Hanken Grotesk"],"headline-lg-mobile":["Playfair Display"],"headline-sm":["Playfair Display"],"body-md":["Hanken Grotesk"],"display-md-mobile":["Playfair Display"],"label-md":["Hanken Grotesk"],"body-lg":["Hanken Grotesk"],"headline-lg":["Playfair Display"],"display-lg-mobile":["Playfair Display"],"title-md":["Hanken Grotesk"],"display-lg":["Playfair Display"],"body-sm":["Hanken Grotesk"]},fontSize:{"display-md":["40px",{lineHeight:"48px",letterSpacing:"-0.01em",fontWeight:"500"}],"label-sm":["10px",{lineHeight:"14px",letterSpacing:"0.16em",fontWeight:"700"}],"headline-lg-mobile":["24px",{lineHeight:"32px",letterSpacing:"0em",fontWeight:"500"}],"headline-sm":["20px",{lineHeight:"28px",letterSpacing:"0.01em",fontWeight:"600"}],"body-md":["15px",{lineHeight:"24px",letterSpacing:"0.01em",fontWeight:"400"}],"display-md-mobile":["30px",{lineHeight:"36px",letterSpacing:"0em",fontWeight:"500"}],"label-md":["12px",{lineHeight:"16px",letterSpacing:"0.12em",fontWeight:"600"}],"body-lg":["18px",{lineHeight:"28px",letterSpacing:"0.01em",fontWeight:"400"}],"headline-lg":["32px",{lineHeight:"40px",letterSpacing:"0em",fontWeight:"500"}],"display-lg-mobile":["38px",{lineHeight:"44px",letterSpacing:"-0.01em",fontWeight:"600"}],"title-md":["16px",{lineHeight:"24px",letterSpacing:"0.04em",fontWeight:"600"}],"display-lg":["56px",{lineHeight:"64px",letterSpacing:"-0.02em",fontWeight:"600"}],"body-sm":["13px",{lineHeight:"20px",letterSpacing:"0.02em",fontWeight:"400"}]}}}}</script></head><body class="bg-surface font-body-md text-on-surface antialiased"><header class="fixed top-0 left-0 right-0 z-50 bg-surface/95 backdrop-blur-xl shadow-[0_12px_32px_-4px_rgba(74,14,23,0.08),0_4px_12px_-2px_rgba(28,26,23,0.04)]"><div class="bg-primary-container px-space-md py-space-xs text-center"><p class="text-tertiary-fixed font-label-sm uppercase tracking-widest">Complimentary Worldwide Express Delivery on Royal Heirloom Orders &amp; Custom Fall/Pico Stitching</p></div><div class="h-20 max-w-[1440px] mx-auto px-gutter-mobile lg:px-margin flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-md"><button aria-controls="mobile-nav-drawer" aria-expanded="false" aria-haspopup="dialog" aria-label="Open Navigation Directory" class="xl:hidden p-1.5 -ml-1 text-on-surface hover:text-primary transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary" id="mobile-nav-toggle" type="button"><span class="material-symbols-outlined text-2xl">menu</span></button><img alt="KalaVirasat Royal Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ALJJyrDjRUMVJ8BGwAL3MTGBtfOEGLbHtTGX_fJXgOJnrNgN3RmOGoo3yfTqlXjTWCawFvt1vdqYt5NgjgX_NVI0ikE7m28LxCyEF3jN-BdsLWpRtLOrvPUxpSvZn27pfMeRzVPOvu_xfHdgdXjvUesi23CqcNRbKoe91dXhALRLT2jHZjQu82CCMbM1Bk8WfbRETibWeqPXkzzgE7-0kSE7chgBHBBFzXVTVKuVlG93ThS08w"/><div class="hidden sm:flex flex-col"><span class="font-headline-sm text-headline-sm text-primary leading-none tracking-tight">KALA VIRASAT</span><span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest mt-1">Haute Saree Atelier</span></div></div><nav class="hidden xl:flex items-center gap-space-lg" data-active-classes="text-primary font-bold border-b border-tertiary-container"><a aria-current="page" class="uppercase tracking-wider transition-colors py-1 text-primary font-bold border-b border-tertiary-container" data-path="heritage-weaves" href="#">Heritage Weaves</a><a class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant hover:text-primary transition-colors py-1" data-path="banarasi-brocades" href="#">Banarasi Brocades</a><a class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant hover:text-primary transition-colors py-1" data-path="kanjeevaram-silks" href="#">Kanjeevaram Silks</a><a class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant hover:text-primary transition-colors py-1" data-path="bridal-trousseau" href="#">Bridal Troussseau</a><a class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant hover:text-primary transition-colors py-1" data-path="handloom-organza" href="#">Handloom Organza</a><a class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant hover:text-primary transition-colors py-1" data-path="atelier-story" href="#">Atelier Story</a></nav><div class="flex items-center gap-space-sm sm:gap-space-md"><div class="relative inline-block text-left"><select class="appearance-none bg-surface-container-low text-on-surface font-label-md text-label-md uppercase px-space-sm py-1 pr-6 rounded-none cursor-pointer focus:outline-none"><option value="INR">INR (₹)</option><option value="USD">USD ($)</option><option value="GBP">GBP (£)</option><option value="AED">AED (د.إ)</option></select><span class="material-symbols-outlined absolute right-1 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none text-base">expand_more</span></div><button aria-label="Search Catalog" class="p-1 text-on-surface-variant hover:text-primary transition-colors" type="button"><span class="material-symbols-outlined">search</span></button><a class="relative p-1 text-on-surface-variant hover:text-primary transition-colors" data-path="wishlist" href="#"><span class="material-symbols-outlined">favorite</span><span class="absolute -top-1 -right-1 bg-secondary text-on-secondary font-label-sm text-label-sm w-4 h-4 rounded-full flex items-center justify-center">3</span></a><a aria-label="View Cart Atelier" class="relative p-1 text-on-surface-variant hover:text-primary transition-colors" href="cart.html"><span class="material-symbols-outlined">shopping_bag</span><span class="absolute -top-1 -right-1 bg-primary-container text-on-primary font-label-sm text-label-sm w-4 h-4 rounded-full flex items-center justify-center">2</span></a><div class="pl-space-xs"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAqwKASWehxAg2REqsT-834p9BKIpt3m38-Svm1woQ5co21ogSBuhB7AxFY1eaH9YgVMA9MzCtnk-k3_JvU1u5C18b8yJbQmEiShF42UBIaON8bNuX86Dco3Wi3faDRb6KueLKtPEi9VpmTlD8z63k9hvLDW6dlhcB6ZbHNJ2GQiYsVBh_7trq4657JHl4PvFJ5Iy9venQ3TvLQGjZoXFAcQld0ibfezX1ALYUVt1yg"/></div></div></div></header>
+<!-- Mobile Navigation Drawer using HTML5 <dialog> -->
+<dialog aria-label="Atelier Navigation Menu" class="m-0 p-0 max-w-[320px] w-[85vw] h-[100dvh] max-h-none bg-surface text-on-surface backdrop:bg-primary/60 backdrop:backdrop-blur-sm fixed inset-y-0 left-0 shadow-2xl border-r border-tertiary-fixed/30 overflow-y-auto drawer-slide-in" id="mobile-nav-drawer">
+<div class="flex flex-col h-full p-space-md">
+<div class="flex items-center justify-between pb-space-md border-b border-outline-variant/40">
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-primary">KALA VIRASAT</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest">Royal Directory</span>
+</div>
+<button aria-label="Close navigation menu" class="p-1.5 text-on-surface-variant hover:text-primary transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary" id="mobile-nav-close" type="button">
+<span class="material-symbols-outlined text-2xl">close</span>
+</button>
+</div>
+<nav aria-label="Mobile Collections" class="flex flex-col gap-space-sm py-space-lg">
+<a class="py-2 px-space-xs font-label-md text-label-md uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors pl-3" href="index.html">Homepage</a>
+<a class="py-2 px-space-xs font-label-md text-label-md uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors pl-3" href="#">Heritage Weaves</a>
+<a class="py-2 px-space-xs font-label-md text-label-md uppercase tracking-widest text-primary font-bold border-l-2 border-primary-container pl-3" href="#">Banarasi Brocades</a>
+<a class="py-2 px-space-xs font-label-md text-label-md uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors pl-3" href="#">Kanjeevaram Silks</a>
+<a class="py-2 px-space-xs font-label-md text-label-md uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors pl-3" href="product.html">Bridal Trousseau</a>
+<a class="py-2 px-space-xs font-label-md text-label-md uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors pl-3" href="#">Handloom Organza</a>
+<a class="py-2 px-space-xs font-label-md text-label-md uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors pl-3" href="#">Atelier Story</a>
+</nav>
+<div class="mt-auto pt-space-md border-t border-outline-variant/30 flex flex-col gap-space-xs text-on-surface-variant">
+<div class="flex items-center gap-2 text-primary font-title-md text-title-md">
+<span class="material-symbols-outlined text-base">support_agent</span>
+<span>Patron Concierge</span>
+</div>
+<p class="font-body-sm text-body-sm">Direct Line: +91 98100 23456</p>
+<p class="font-label-sm text-label-sm text-secondary uppercase font-semibold">Master Drapists Available</p>
+</div>
+</div>
+</dialog>
+<main class="w-full pt-28 bg-surface min-h-[calc(100vh-280px)]"><div class="flex flex-col w-full">
+<!-- Top Subtle Announcement / Breadcrumb Section -->
+<section class="w-full bg-surface-container-low py-space-sm px-gutter-mobile lg:px-margin shadow-sm">
+<div class="max-w-[1440px] mx-auto flex flex-wrap items-center justify-between gap-space-xs text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider">
+<nav class="flex items-center gap-space-xs">
+<a class="hover:text-primary transition-colors" href="index.html">Home</a>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<a class="hover:text-primary transition-colors" href="#">Heritage Weaves</a>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<span class="text-primary font-bold">Banarasi Brocades</span>
+</nav>
+<div class="flex items-center gap-space-md">
+<span class="flex items-center gap-1 text-secondary font-semibold">
+<span class="w-2 h-2 rounded-full bg-secondary inline-block"></span>
+          Master Guild Weavers Active • Varanasi Ghats
+        </span>
+<span class="hidden md:inline-block text-outline-variant">•</span>
+<span class="hidden md:inline-block">GI Tag #49 Assured</span>
+</div>
+</div>
+</section>
+<!-- Editorial Catalog Header -->
+<header class="w-full bg-surface px-gutter-mobile lg:px-margin pt-space-lg pb-space-md">
+<div class="max-w-[1440px] mx-auto flex flex-col lg:flex-row lg:items-end justify-between gap-space-md">
+<div class="max-w-3xl space-y-space-xs">
+<div class="inline-flex items-center gap-2 bg-primary-container/10 px-space-sm py-1 rounded-sm">
+<span class="material-symbols-outlined text-primary text-sm">stars</span>
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-widest font-bold">The Royal Imperial Weave Archives</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-primary tracking-tight">Banarasi Silk &amp; Zari Masterpieces</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl leading-relaxed">
+          Woven along the sacred ghats of Varanasi using antique wooden jacquard pits and tested pure silver-dipped electroplated zari threads. 48 curated royal heirlooms, each requiring between 60 to 220 uninterrupted artisan days.
+        </p>
+</div>
+<!-- Action & Sort Controls -->
+<div class="flex flex-wrap items-center gap-space-sm self-start lg:self-end">
+<div class="flex items-center gap-2 bg-surface-container px-space-sm py-2 rounded-sm shadow-sm">
+<label class="font-label-sm text-label-sm uppercase text-on-surface-variant" for="catalog-sort">Sort Archives:</label>
+<select class="bg-transparent font-title-md text-title-md text-primary font-semibold focus:outline-none cursor-pointer" id="catalog-sort">
+<option value="featured">Featured Curations</option>
+<option selected="" value="rarity">Weaver Rarity &amp; Guild Hours</option>
+<option value="price-desc">Price: Imperial to Bespoke (High to Low)</option>
+<option value="price-asc">Price: Bespoke to Imperial (Low to High)</option>
+<option value="new">Recent Loom Completions</option>
+</select>
+</div>
+<button class="lg:hidden inline-flex items-center gap-2 bg-primary-container text-on-primary px-space-md py-2 font-label-md text-label-md uppercase tracking-wider rounded-sm" id="mobile-filter-trigger" type="button">
+<span class="material-symbols-outlined text-sm">tune</span>
+          Filter Heirlooms (6)
+        </button>
+</div>
+</div>
+<!-- Active Filter Chips Bar -->
+<div class="max-w-[1440px] mx-auto mt-space-md pt-space-xs flex flex-wrap items-center gap-2">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant mr-1">Active Curation:</span>
+<span class="inline-flex items-center gap-1.5 bg-primary-container text-on-primary font-label-sm text-label-sm uppercase tracking-wider px-space-sm py-1 rounded-sm">
+        Kadwa Technique
+        <span class="material-symbols-outlined text-xs cursor-pointer hover:opacity-75">close</span>
+</span>
+<span class="inline-flex items-center gap-1.5 bg-primary-container text-on-primary font-label-sm text-label-sm uppercase tracking-wider px-space-sm py-1 rounded-sm">
+        Pure Katan Silk
+        <span class="material-symbols-outlined text-xs cursor-pointer hover:opacity-75">close</span>
+</span>
+<span class="inline-flex items-center gap-1.5 bg-surface-container text-on-surface font-label-sm text-label-sm uppercase tracking-wider px-space-sm py-1 rounded-sm">
+        Real Gold/Silver Zari
+        <span class="material-symbols-outlined text-xs cursor-pointer hover:text-primary">close</span>
+</span>
+<button class="text-primary hover:text-on-primary-container font-label-sm text-label-sm uppercase tracking-wider underline ml-2" type="button">
+        Clear All Filters
+      </button>
+</div>
+</header>
+<!-- Main Curation Layout: Left Faceted Sidebar + 3-Column Product Showcase -->
+<div class="w-full max-w-[1440px] mx-auto px-gutter-mobile lg:px-margin py-space-md">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-start">
+<!-- Faceted Filter Sidebar (Shopify Atelier Elegance) -->
+<aside class="hidden lg:block lg:col-span-3 bg-surface-container-low p-space-md rounded-sm space-y-space-md shadow-sm">
+<div class="flex items-center justify-between pb-space-xs">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-base">tune</span>
+<h2 class="font-headline-sm text-headline-sm text-primary tracking-wide">Refine Loom</h2>
+</div>
+<button class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors" type="button">Reset</button>
+</div>
+<!-- Filter Group: Weave Technique -->
+<div class="space-y-space-xs pt-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-title-md text-title-md text-primary">Weave Technique</span>
+<span class="material-symbols-outlined text-sm text-on-surface-variant">expand_less</span>
+</div>
+<div class="space-y-1.5 pt-1">
+<label class="flex items-center justify-between cursor-pointer group">
+<span class="flex items-center gap-2 text-on-surface font-body-sm text-body-sm group-hover:text-primary transition-colors">
+<input checked="" class="w-4 h-4 rounded-none accent-[#4A0E17] cursor-pointer" type="checkbox"/>
+                Kadwa (Discontinuous Weft)
+              </span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">14</span>
+</label>
+<label class="flex items-center justify-between cursor-pointer group">
+<span class="flex items-center gap-2 text-on-surface font-body-sm text-body-sm group-hover:text-primary transition-colors">
+<input class="w-4 h-4 rounded-none accent-[#4A0E17] cursor-pointer" type="checkbox"/>
+                Antique Jangla (Floral Vines)
+              </span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">8</span>
+</label>
+<label class="flex items-center justify-between cursor-pointer group">
+<span class="flex items-center gap-2 text-on-surface font-body-sm text-body-sm group-hover:text-primary transition-colors">
+<input class="w-4 h-4 rounded-none accent-[#4A0E17] cursor-pointer" type="checkbox"/>
+                Shikargah (Royal Hunt Scenes)
+              </span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">5</span>
+</label>
+<label class="flex items-center justify-between cursor-pointer group">
+<span class="flex items-center gap-2 text-on-surface font-body-sm text-body-sm group-hover:text-primary transition-colors">
+<input class="w-4 h-4 rounded-none accent-[#4A0E17] cursor-pointer" type="checkbox"/>
+                Tanchoi Multi-Silk
+              </span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">9</span>
+</label>
+<label class="flex items-center justify-between cursor-pointer group">
+<span class="flex items-center gap-2 text-on-surface font-body-sm text-body-sm group-hover:text-primary transition-colors">
+<input class="w-4 h-4 rounded-none accent-[#4A0E17] cursor-pointer" type="checkbox"/>
+                Meenakari Enamel Inlay
+              </span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">7</span>
+</label>
+<label class="flex items-center justify-between cursor-pointer group">
+<span class="flex items-center gap-2 text-on-surface font-body-sm text-body-sm group-hover:text-primary transition-colors">
+<input class="w-4 h-4 rounded-none accent-[#4A0E17] cursor-pointer" type="checkbox"/>
+                Kadhuan Hand-picked Zari
+              </span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">5</span>
+</label>
+</div>
+</div>
+<!-- Filter Group: Raw Fabric Base -->
+<div class="space-y-space-xs pt-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-title-md text-title-md text-primary">Fabric Base</span>
+<span class="material-symbols-outlined text-sm text-on-surface-variant">expand_less</span>
+</div>
+<div class="space-y-1.5 pt-1">
+<label class="flex items-center justify-between cursor-pointer group">
+<span class="flex items-center gap-2 text-on-surface font-body-sm text-body-sm group-hover:text-primary transition-colors">
+<input checked="" class="w-4 h-4 rounded-none accent-[#4A0E17] cursor-pointer" type="checkbox"/>
+                Pure Katan Silk (Mulberry)
+              </span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">24</span>
+</label>
+<label class="flex items-center justify-between cursor-pointer group">
+<span class="flex items-center gap-2 text-on-surface font-body-sm text-body-sm group-hover:text-primary transition-colors">
+<input class="w-4 h-4 rounded-none accent-[#4A0E17] cursor-pointer" type="checkbox"/>
+                Organza Tissue Zari Sheer
+              </span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">11</span>
+</label>
+<label class="flex items-center justify-between cursor-pointer group">
+<span class="flex items-center gap-2 text-on-surface font-body-sm text-body-sm group-hover:text-primary transition-colors">
+<input class="w-4 h-4 rounded-none accent-[#4A0E17] cursor-pointer" type="checkbox"/>
+                Georgette Khaddi Handspun
+              </span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">8</span>
+</label>
+<label class="flex items-center justify-between cursor-pointer group">
+<span class="flex items-center gap-2 text-on-surface font-body-sm text-body-sm group-hover:text-primary transition-colors">
+<input class="w-4 h-4 rounded-none accent-[#4A0E17] cursor-pointer" type="checkbox"/>
+                Tussar Silk Ghicha
+              </span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">5</span>
+</label>
+</div>
+</div>
+<!-- Filter Group: Zari Purity -->
+<div class="space-y-space-xs pt-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-title-md text-title-md text-primary">Zari Purity Standard</span>
+<span class="material-symbols-outlined text-sm text-on-surface-variant">expand_less</span>
+</div>
+<div class="space-y-1.5 pt-1">
+<label class="flex items-center justify-between cursor-pointer group">
+<span class="flex items-center gap-2 text-on-surface font-body-sm text-body-sm group-hover:text-primary transition-colors">
+<input checked="" class="w-4 h-4 rounded-none accent-[#4A0E17] cursor-pointer" type="checkbox"/>
+                Certified Real Silver Zari (98.5%)
+              </span>
+<span class="font-label-sm text-label-sm text-secondary font-bold">Cert.</span>
+</label>
+<label class="flex items-center justify-between cursor-pointer group">
+<span class="flex items-center gap-2 text-on-surface font-body-sm text-body-sm group-hover:text-primary transition-colors">
+<input class="w-4 h-4 rounded-none accent-[#4A0E17] cursor-pointer" type="checkbox"/>
+                Tested Pure Gold Dipped
+              </span>
+<span class="font-label-sm text-label-sm text-secondary font-bold">Cert.</span>
+</label>
+<label class="flex items-center justify-between cursor-pointer group">
+<span class="flex items-center gap-2 text-on-surface font-body-sm text-body-sm group-hover:text-primary transition-colors">
+<input class="w-4 h-4 rounded-none accent-[#4A0E17] cursor-pointer" type="checkbox"/>
+                High-Grade Antique Zari Lustre
+              </span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">16</span>
+</label>
+</div>
+</div>
+<!-- Filter Group: Occasion -->
+<div class="space-y-space-xs pt-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-title-md text-title-md text-primary">Ceremonial Occasion</span>
+<span class="material-symbols-outlined text-sm text-on-surface-variant">expand_less</span>
+</div>
+<div class="flex flex-wrap gap-1.5 pt-1">
+<button class="bg-primary text-on-primary font-label-sm text-label-sm uppercase px-2 py-1 tracking-wider" type="button">Royal Bridal</button>
+<button class="bg-surface-container text-on-surface hover:bg-surface-container-high font-label-sm text-label-sm uppercase px-2 py-1 tracking-wider transition-colors" type="button">Sangeet Soirée</button>
+<button class="bg-surface-container text-on-surface hover:bg-surface-container-high font-label-sm text-label-sm uppercase px-2 py-1 tracking-wider transition-colors" type="button">Temple Poojas</button>
+<button class="bg-surface-container text-on-surface hover:bg-surface-container-high font-label-sm text-label-sm uppercase px-2 py-1 tracking-wider transition-colors" type="button">Festive Heirloom</button>
+</div>
+</div>
+<!-- Filter Group: Color Palette Swatches -->
+<div class="space-y-space-xs pt-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-title-md text-title-md text-primary">Royal Color Swatches</span>
+<span class="material-symbols-outlined text-sm text-on-surface-variant">expand_less</span>
+</div>
+<div class="grid grid-cols-6 gap-2 pt-1">
+<button class="w-8 h-8 rounded-full bg-primary-container ring-2 ring-primary ring-offset-2 flex items-center justify-center text-on-primary" title="Deep Crimson Red" type="button">
+<span class="material-symbols-outlined text-xs font-bold">check</span>
+</button>
+<button class="w-8 h-8 rounded-full bg-secondary hover:scale-105 transition-transform" title="Regal Emerald Green" type="button"></button>
+<button class="w-8 h-8 rounded-full bg-on-primary-container hover:scale-105 transition-transform" title="Rani Pink" type="button"></button>
+<button class="w-8 h-8 rounded-full bg-tertiary-fixed-dim hover:scale-105 transition-transform" title="Antique Mustard Gold" type="button"></button>
+<button class="w-8 h-8 rounded-full bg-[#1b3b5f] hover:scale-105 transition-transform" title="Peacock Royal Blue" type="button"></button>
+<button class="w-8 h-8 rounded-full bg-surface-container-high hover:scale-105 transition-transform" title="Ivory Parchment Gold" type="button"></button>
+</div>
+</div>
+<!-- Filter Group: Price Slider -->
+<div class="space-y-space-xs pt-space-xs pb-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-title-md text-title-md text-primary">Investment Scale</span>
+<span class="font-label-sm text-label-sm text-secondary font-bold">INR (₹)</span>
+</div>
+<div class="pt-2">
+<input class="w-full accent-[#4A0E17] cursor-pointer" max="350000" min="45000" type="range" value="280000"/>
+<div class="flex justify-between items-center text-on-surface-variant font-label-sm text-label-sm pt-1">
+<span>₹45,000</span>
+<span class="font-semibold text-primary">Up to ₹2,80,000</span>
+<span>₹3,50,000+</span>
+</div>
+</div>
+</div>
+<!-- Bespoke Loom Reservation Note -->
+<div class="bg-surface-container p-space-sm rounded-sm">
+<p class="font-label-sm text-label-sm text-primary uppercase font-bold tracking-widest flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">handshake</span>
+            Loom Commissioning
+          </p>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+            Need an exclusive bridal color or silver zari warp custom dyed? Contact our master weaver concierge.
+          </p>
+<a class="inline-block mt-2 font-label-sm text-label-sm text-primary uppercase tracking-wider font-semibold underline hover:text-on-primary-container" href="#">
+            Request Custom Warp Consultation →
+          </a>
+</div>
+</aside>
+<!-- 3-Column Luxury Product Grid -->
+<section class="col-span-1 lg:col-span-9">
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-space-md">
+<!-- Product Card 1: Crimson Kadwa Jangla -->
+<article class="group flex flex-col bg-surface-container-lowest rounded-sm shadow-md hover:shadow-xl transition-all duration-300">
+<div class="relative w-full aspect-[3/4] overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Editorial close-up drape of an imperial crimson red Banarasi pure katan silk saree adorned with intricate handwoven Kadwa real silver and gold zari floral vines. The rich fabric texture catches warm royal lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuASzUe-XZJhC5_0LwyaqBOlicyE2BK7KhQ2aTHhtaIRbJTaJuy2_hdGSGKKXAdaFTctU3vyfrfDOWs3GX3qmkT8tPA9BWsDzvZsgD5pe0bahY-LNiKhQ4Cx8Go2vBIh7H2AkSTU-WIv4tzDfUeqyCjS1VBMPuKooY3q0oglxTOyUlp_UO70L-MPTJKadplETjpoJ17KEBFKLsYp-5KqapuFRE48kfi0S_YcDW1H2svm"/>
+<!-- Badges -->
+<div class="absolute top-3 left-3 flex flex-col gap-1.5 items-start">
+<span class="bg-primary-container text-on-primary font-label-sm text-label-sm uppercase tracking-widest px-2 py-0.5 shadow-sm">
+                  Royal Bridal
+                </span>
+<span class="bg-secondary text-on-secondary font-label-sm text-label-sm uppercase tracking-wider px-2 py-0.5 shadow-sm">
+                  Silk Mark Assured
+                </span>
+</div>
+<!-- Real-time stock / rarity tag -->
+<div class="absolute bottom-3 left-3 bg-surface/90 backdrop-blur-sm px-2 py-0.5 rounded-sm">
+<span class="font-label-sm text-label-sm text-error uppercase font-bold tracking-wider flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-error animate-ping"></span>
+                  Only 1 Piece Handwoven
+                </span>
+</div>
+<!-- Wishlist Heart Button -->
+<button aria-label="Add to Wishlist" class="absolute top-3 right-3 w-8 h-8 rounded-full bg-surface/80 backdrop-blur-sm flex items-center justify-center text-primary hover:bg-surface transition-colors shadow-sm" type="button">
+<span class="material-symbols-outlined text-base">favorite_border</span>
+</button>
+</div>
+<!-- Card Body -->
+<div class="p-space-sm flex flex-col flex-1 justify-between gap-space-xs">
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest">Pure Katan Silk • 210 Zari Hours</p>
+<h3 class="font-headline-sm text-headline-sm text-primary tracking-tight mt-1 group-hover:text-on-primary-container transition-colors">
+                  Gul-e-Jangla Imperial Crimson Saree
+                </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 mt-1">
+                  Rare discontinuous kadwa weft with antique roopa sona floral trellises and ornate mughal floral border pallu.
+                </p>
+</div>
+<div class="pt-space-xs">
+<div class="flex items-baseline justify-between">
+<div>
+<span class="font-title-md text-title-md text-primary font-bold">₹1,84,000</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant line-through ml-2">₹2,10,000</span>
+</div>
+<span class="bg-surface-container px-2 py-0.5 font-label-sm text-label-sm text-secondary font-semibold uppercase">Real Silver Zari</span>
+</div>
+<div class="mt-space-sm pt-space-xs flex items-center gap-2">
+<button class="flex-1 bg-primary-container hover:bg-primary text-on-primary font-label-md text-label-md uppercase tracking-wider py-2 transition-colors flex items-center justify-center gap-1 shadow-sm" type="button">
+<span class="material-symbols-outlined text-sm">shopping_bag</span>
+                    Express Bag
+                  </button>
+<button class="bg-surface-container hover:bg-surface-container-high text-primary px-3 py-2 font-label-sm text-label-sm uppercase tracking-wider transition-colors flex items-center gap-1" title="Customize Blouse &amp; Fall Pico" type="button">
+<span class="material-symbols-outlined text-sm">styler</span>
+                    Tailor
+                  </button>
+</div>
+</div>
+</div>
+</article>
+<!-- Product Card 2: Emerald Shikargah Royal -->
+<article class="group flex flex-col bg-surface-container-lowest rounded-sm shadow-md hover:shadow-xl transition-all duration-300">
+<div class="relative w-full aspect-[3/4] overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Rich deep emerald green Banarasi brocade silk saree with hand-woven antique Shikargah hunting motifs featuring deer, elephants, and peacocks in fine antique gold zari threads, draped majestically on marble pedestal." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBQIyV2rujsQS0xxWu4V6BlGT4uvvLy2_2ZZ3t13DBZgMTMGqQ8qtoyM0r28W2you5kGgwqRNV65jVeXcwbUkQIBRvTuqlRhtFOM7tTTzfAxW54V7VCNtSK5r2LOrSwVEHuTumjvhKWzjq7y7MoJZf7tBa4XE1gbgQr-BErZ5p-IxZnjHePCv7LuIeswFLA_hyAKjgbDkdIW57HOIxsVSURqAx63JV9uLFoUVot_CO2"/>
+<div class="absolute top-3 left-3 flex flex-col gap-1.5 items-start">
+<span class="bg-primary text-on-primary font-label-sm text-label-sm uppercase tracking-widest px-2 py-0.5 shadow-sm">
+                  Heirloom Archive
+                </span>
+<span class="bg-secondary text-on-secondary font-label-sm text-label-sm uppercase tracking-wider px-2 py-0.5 shadow-sm">
+                  Silk Mark Assured
+                </span>
+</div>
+<div class="absolute bottom-3 left-3 bg-surface/90 backdrop-blur-sm px-2 py-0.5 rounded-sm">
+<span class="font-label-sm text-label-sm text-primary uppercase font-bold tracking-wider flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                  Loom Ready to Dispatch
+                </span>
+</div>
+<button aria-label="Add to Wishlist" class="absolute top-3 right-3 w-8 h-8 rounded-full bg-surface/80 backdrop-blur-sm flex items-center justify-center text-primary hover:bg-surface transition-colors shadow-sm" type="button">
+<span class="material-symbols-outlined text-base">favorite_border</span>
+</button>
+</div>
+<div class="p-space-sm flex flex-col flex-1 justify-between gap-space-xs">
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest">Handspun Katan • 185 Zari Hours</p>
+<h3 class="font-headline-sm text-headline-sm text-primary tracking-tight mt-1 group-hover:text-on-primary-container transition-colors">
+                  Varanasi Shikargah Heritage Emerald
+                </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 mt-1">
+                  19th century royal hunting tableau woven across the body with rich antique sona-rupa zari borders.
+                </p>
+</div>
+<div class="pt-space-xs">
+<div class="flex items-baseline justify-between">
+<div>
+<span class="font-title-md text-title-md text-primary font-bold">₹1,42,000</span>
+</div>
+<span class="bg-surface-container px-2 py-0.5 font-label-sm text-label-sm text-primary font-semibold uppercase">Shikargah Weave</span>
+</div>
+<div class="mt-space-sm pt-space-xs flex items-center gap-2">
+<button class="flex-1 bg-primary-container hover:bg-primary text-on-primary font-label-md text-label-md uppercase tracking-wider py-2 transition-colors flex items-center justify-center gap-1 shadow-sm" type="button">
+<span class="material-symbols-outlined text-sm">shopping_bag</span>
+                    Express Bag
+                  </button>
+<button class="bg-surface-container hover:bg-surface-container-high text-primary px-3 py-2 font-label-sm text-label-sm uppercase tracking-wider transition-colors flex items-center gap-1" title="Customize Blouse &amp; Fall Pico" type="button">
+<span class="material-symbols-outlined text-sm">styler</span>
+                    Tailor
+                  </button>
+</div>
+</div>
+</div>
+</article>
+<!-- Product Card 3: Ivory Gold Organza Tissue -->
+<article class="group flex flex-col bg-surface-container-lowest rounded-sm shadow-md hover:shadow-xl transition-all duration-300">
+<div class="relative w-full aspect-[3/4] overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Luminescent ivory and tissue gold handloom Banarasi organza saree adorned with delicate Meenakari colorful floral buttas and spun silver zari borders against a warm champagne studio backdrop." src="https://lh3.googleusercontent.com/aida-public/AB6AXuADXybnbTSXoQCsOLT4GM53tbbRXvdojb2GQiHau_i2z4HROjtstyJTXzI2CrKmEoosxaYsWkZb9Bjp1r_aWmXdyCNFIojsY6fY0X2R5OdHmLSDHgVF3wFNAwN_1ShA_KzJriTSxrxcQoPk3wnOkNu0qxcydhhOdrUG3Y04fWRqJJaUCkm5FfaDRNi6IZ-Ck_y5nQca2rgw_Jw3eUI0xBsIw99fxZulF1_HKUuMsgWA"/>
+<div class="absolute top-3 left-3 flex flex-col gap-1.5 items-start">
+<span class="bg-secondary text-on-secondary font-label-sm text-label-sm uppercase tracking-widest px-2 py-0.5 shadow-sm">
+                  Organza Sheer
+                </span>
+<span class="bg-surface-container-high text-primary font-label-sm text-label-sm uppercase tracking-wider px-2 py-0.5 shadow-sm">
+                  Meenakari
+                </span>
+</div>
+<div class="absolute bottom-3 left-3 bg-surface/90 backdrop-blur-sm px-2 py-0.5 rounded-sm">
+<span class="font-label-sm text-label-sm text-error uppercase font-bold tracking-wider flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-error animate-ping"></span>
+                  Last 2 Pieces
+                </span>
+</div>
+<button aria-label="Add to Wishlist" class="absolute top-3 right-3 w-8 h-8 rounded-full bg-surface/80 backdrop-blur-sm flex items-center justify-center text-primary hover:bg-surface transition-colors shadow-sm" type="button">
+<span class="material-symbols-outlined text-base">favorite_border</span>
+</button>
+</div>
+<div class="p-space-sm flex flex-col flex-1 justify-between gap-space-xs">
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest">Kora Tissue • 120 Zari Hours</p>
+<h3 class="font-headline-sm text-headline-sm text-primary tracking-tight mt-1 group-hover:text-on-primary-container transition-colors">
+                  Chand-Sitara Sheer Tissue Organza
+                </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 mt-1">
+                  Whisper-weight tissue silk with gold-warp kadwa resham floral bootees and lustrous selvedge finish.
+                </p>
+</div>
+<div class="pt-space-xs">
+<div class="flex items-baseline justify-between">
+<div>
+<span class="font-title-md text-title-md text-primary font-bold">₹98,500</span>
+</div>
+<span class="bg-surface-container px-2 py-0.5 font-label-sm text-label-sm text-secondary font-semibold uppercase">Bespoke Light</span>
+</div>
+<div class="mt-space-sm pt-space-xs flex items-center gap-2">
+<button class="flex-1 bg-primary-container hover:bg-primary text-on-primary font-label-md text-label-md uppercase tracking-wider py-2 transition-colors flex items-center justify-center gap-1 shadow-sm" type="button">
+<span class="material-symbols-outlined text-sm">shopping_bag</span>
+                    Express Bag
+                  </button>
+<button class="bg-surface-container hover:bg-surface-container-high text-primary px-3 py-2 font-label-sm text-label-sm uppercase tracking-wider transition-colors flex items-center gap-1" title="Customize Blouse &amp; Fall Pico" type="button">
+<span class="material-symbols-outlined text-sm">styler</span>
+                    Tailor
+                  </button>
+</div>
+</div>
+</div>
+</article>
+<!-- Product Card 4: Antique Mustard Tanchoi -->
+<article class="group flex flex-col bg-surface-container-lowest rounded-sm shadow-md hover:shadow-xl transition-all duration-300">
+<div class="relative w-full aspect-[3/4] overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Regal antique mustard yellow Banarasi Tanchoi pure silk saree featuring multi-color satin silk wefts woven in geometric paisley medallions with dull gold zari border details." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDXYBUd-MJbB5LyqbzGQsFjnPabOkxLxNkckGyFEvZtsfNJERcGgUtNTYXj7Xp_BSkW_jWZIxGhi8heTq6L__4BpOZFkshltKWNSAlMxLbqEBwY2XukAZZiOojyklnbLPqaZJo2iJK1aepphhboTxIHsbYm8ikY4Yu7PJW-1z9_KRvMhijNPewtiwj-O3UgQNKcOe3f-CJTarTRWymX63SlsIaO9-qV6Ll2ZQgyhOOl"/>
+<div class="absolute top-3 left-3 flex flex-col gap-1.5 items-start">
+<span class="bg-primary text-on-primary font-label-sm text-label-sm uppercase tracking-widest px-2 py-0.5 shadow-sm">
+                  Festive Heirloom
+                </span>
+</div>
+<div class="absolute bottom-3 left-3 bg-surface/90 backdrop-blur-sm px-2 py-0.5 rounded-sm">
+<span class="font-label-sm text-label-sm text-primary uppercase font-bold tracking-wider flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                  Loom Fresh
+                </span>
+</div>
+<button aria-label="Add to Wishlist" class="absolute top-3 right-3 w-8 h-8 rounded-full bg-surface/80 backdrop-blur-sm flex items-center justify-center text-primary hover:bg-surface transition-colors shadow-sm" type="button">
+<span class="material-symbols-outlined text-base">favorite_border</span>
+</button>
+</div>
+<div class="p-space-sm flex flex-col flex-1 justify-between gap-space-xs">
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest">Satin Tanchoi • 140 Zari Hours</p>
+<h3 class="font-headline-sm text-headline-sm text-primary tracking-tight mt-1 group-hover:text-on-primary-container transition-colors">
+                  Kesari Badami Tanchoi Brocade
+                </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 mt-1">
+                  Multi-colored extra warp relief weaving with intricate paisley medallions and pure mulberry silk fall.
+                </p>
+</div>
+<div class="pt-space-xs">
+<div class="flex items-baseline justify-between">
+<div>
+<span class="font-title-md text-title-md text-primary font-bold">₹76,000</span>
+</div>
+<span class="bg-surface-container px-2 py-0.5 font-label-sm text-label-sm text-primary font-semibold uppercase">Tanchoi</span>
+</div>
+<div class="mt-space-sm pt-space-xs flex items-center gap-2">
+<button class="flex-1 bg-primary-container hover:bg-primary text-on-primary font-label-md text-label-md uppercase tracking-wider py-2 transition-colors flex items-center justify-center gap-1 shadow-sm" type="button">
+<span class="material-symbols-outlined text-sm">shopping_bag</span>
+                    Express Bag
+                  </button>
+<button class="bg-surface-container hover:bg-surface-container-high text-primary px-3 py-2 font-label-sm text-label-sm uppercase tracking-wider transition-colors flex items-center gap-1" title="Customize Blouse &amp; Fall Pico" type="button">
+<span class="material-symbols-outlined text-sm">styler</span>
+                    Tailor
+                  </button>
+</div>
+</div>
+</div>
+</article>
+<!-- Product Card 5: Rani Pink Katan Meenakari -->
+<article class="group flex flex-col bg-surface-container-lowest rounded-sm shadow-md hover:shadow-xl transition-all duration-300">
+<div class="relative w-full aspect-[3/4] overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Dazzling Rani Gulabi pink Banarasi Katan silk saree with dense gold zari kadwa boota motifs and vibrant enamel thread resham accents, draped over antique teak wood heirloom chest." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBeQe8fqL08TbYETa8D03PfvRaKo9kEwcG3AOnZ-MHOgLhNUte-q88CFmKCGcTxIgMaIrZlSYQIH134F-24zZWWVy7bt1-QMDUqPzBcDtl73X4ckVdIgIflD0Xplhx9kdWzppE9U8YIpBIUQCDtEAWY58JMY3R8esXWyx4bMcwMyba2mTZ3iJSzvKXi_5o209HqCdAFAqX81Gf9qQb-LCwDaCbNSjKM61kBzgpkhKfG"/>
+<div class="absolute top-3 left-3 flex flex-col gap-1.5 items-start">
+<span class="bg-primary-container text-on-primary font-label-sm text-label-sm uppercase tracking-widest px-2 py-0.5 shadow-sm">
+                  Royal Sangeet
+                </span>
+<span class="bg-secondary text-on-secondary font-label-sm text-label-sm uppercase tracking-wider px-2 py-0.5 shadow-sm">
+                  Silk Mark Assured
+                </span>
+</div>
+<div class="absolute bottom-3 left-3 bg-surface/90 backdrop-blur-sm px-2 py-0.5 rounded-sm">
+<span class="font-label-sm text-label-sm text-error uppercase font-bold tracking-wider flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-error animate-ping"></span>
+                  Only 1 Piece Handwoven
+                </span>
+</div>
+<button aria-label="Add to Wishlist" class="absolute top-3 right-3 w-8 h-8 rounded-full bg-surface/80 backdrop-blur-sm flex items-center justify-center text-primary hover:bg-surface transition-colors shadow-sm" type="button">
+<span class="material-symbols-outlined text-base">favorite_border</span>
+</button>
+</div>
+<div class="p-space-sm flex flex-col flex-1 justify-between gap-space-xs">
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest">Katan Silk • 190 Zari Hours</p>
+<h3 class="font-headline-sm text-headline-sm text-primary tracking-tight mt-1 group-hover:text-on-primary-container transition-colors">
+                  Rani Gulabi Meenakari Buta Brocade
+                </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 mt-1">
+                  Enamel thread resham floral detailing woven through tested silver zari jaal with sovereign royal pallu.
+                </p>
+</div>
+<div class="pt-space-xs">
+<div class="flex items-baseline justify-between">
+<div>
+<span class="font-title-md text-title-md text-primary font-bold">₹1,65,000</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant line-through ml-2">₹1,85,000</span>
+</div>
+<span class="bg-surface-container px-2 py-0.5 font-label-sm text-label-sm text-secondary font-semibold uppercase">Real Silver Zari</span>
+</div>
+<div class="mt-space-sm pt-space-xs flex items-center gap-2">
+<button class="flex-1 bg-primary-container hover:bg-primary text-on-primary font-label-md text-label-md uppercase tracking-wider py-2 transition-colors flex items-center justify-center gap-1 shadow-sm" type="button">
+<span class="material-symbols-outlined text-sm">shopping_bag</span>
+                    Express Bag
+                  </button>
+<button class="bg-surface-container hover:bg-surface-container-high text-primary px-3 py-2 font-label-sm text-label-sm uppercase tracking-wider transition-colors flex items-center gap-1" title="Customize Blouse &amp; Fall Pico" type="button">
+<span class="material-symbols-outlined text-sm">styler</span>
+                    Tailor
+                  </button>
+</div>
+</div>
+</div>
+</article>
+<!-- Product Card 6: Midnight Peacock Georgette Khaddi -->
+<article class="group flex flex-col bg-surface-container-lowest rounded-sm shadow-md hover:shadow-xl transition-all duration-300">
+<div class="relative w-full aspect-[3/4] overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Deep royal peacock blue Banarasi Khaddi georgette handloom saree featuring fine zari booti sprinkled across the body with rich antique silver zari scalloped borders." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhlE1TTLuIM0Ywuy9O8YC11t_hR15GTT7tmcg7P1fH4cdYKwtb1vMLDz2iVwFDM1Qjh_A8S0SKmcmopRmwjhG_0wWJ6euP7wXXL3iXx_na1CIVSypqa4DUojS0VJCRzo9JQis41FxjHExk0MCo3tm8V7yd2RX4ukvrgdxoso0CV36w9zXomLk-VJmM-cJRc2m_LAmi9GHUFq6yzMeYv-RQ_dl69TIulUvJ8xS27lx7"/>
+<div class="absolute top-3 left-3 flex flex-col gap-1.5 items-start">
+<span class="bg-secondary text-on-secondary font-label-sm text-label-sm uppercase tracking-widest px-2 py-0.5 shadow-sm">
+                  Handspun Khaddi
+                </span>
+</div>
+<div class="absolute bottom-3 left-3 bg-surface/90 backdrop-blur-sm px-2 py-0.5 rounded-sm">
+<span class="font-label-sm text-label-sm text-primary uppercase font-bold tracking-wider flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                  Loom Ready to Dispatch
+                </span>
+</div>
+<button aria-label="Add to Wishlist" class="absolute top-3 right-3 w-8 h-8 rounded-full bg-surface/80 backdrop-blur-sm flex items-center justify-center text-primary hover:bg-surface transition-colors shadow-sm" type="button">
+<span class="material-symbols-outlined text-base">favorite_border</span>
+</button>
+</div>
+<div class="p-space-sm flex flex-col flex-1 justify-between gap-space-xs">
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest">Georgette Khaddi • 95 Zari Hours</p>
+<h3 class="font-headline-sm text-headline-sm text-primary tracking-tight mt-1 group-hover:text-on-primary-container transition-colors">
+                  Mayur Neel Khaddi Georgette Zari
+                </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 mt-1">
+                  Supple fluid handloom khaddi georgette with delicate silver kadwa booti and lightweight scalloped pallu.
+                </p>
+</div>
+<div class="pt-space-xs">
+<div class="flex items-baseline justify-between">
+<div>
+<span class="font-title-md text-title-md text-primary font-bold">₹82,000</span>
+</div>
+<span class="bg-surface-container px-2 py-0.5 font-label-sm text-label-sm text-primary font-semibold uppercase">Fluid Drape</span>
+</div>
+<div class="mt-space-sm pt-space-xs flex items-center gap-2">
+<button class="flex-1 bg-primary-container hover:bg-primary text-on-primary font-label-md text-label-md uppercase tracking-wider py-2 transition-colors flex items-center justify-center gap-1 shadow-sm" type="button">
+<span class="material-symbols-outlined text-sm">shopping_bag</span>
+                    Express Bag
+                  </button>
+<button class="bg-surface-container hover:bg-surface-container-high text-primary px-3 py-2 font-label-sm text-label-sm uppercase tracking-wider transition-colors flex items-center gap-1" title="Customize Blouse &amp; Fall Pico" type="button">
+<span class="material-symbols-outlined text-sm">styler</span>
+                    Tailor
+                  </button>
+</div>
+</div>
+</div>
+</article>
+</div>
+<!-- Sticky Bottom Curation Count & Pagination Bar -->
+<div class="mt-space-lg p-space-md bg-surface-container-low rounded-sm shadow-sm flex flex-col sm:flex-row items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-sm">
+<span class="w-3 h-3 rounded-full bg-secondary inline-block"></span>
+<span class="font-title-md text-title-md text-primary font-semibold">Showing 6 of 48 Heirloom Masterpieces</span>
+</div>
+<div class="flex items-center gap-2">
+<button class="w-9 h-9 flex items-center justify-center bg-surface-container-highest text-on-surface hover:bg-primary hover:text-on-primary transition-colors font-label-md text-label-md" type="button">1</button>
+<button class="w-9 h-9 flex items-center justify-center bg-primary text-on-primary font-label-md text-label-md" type="button">2</button>
+<button class="w-9 h-9 flex items-center justify-center bg-surface-container-highest text-on-surface hover:bg-primary hover:text-on-primary transition-colors font-label-md text-label-md" type="button">3</button>
+<span class="px-1 text-on-surface-variant">...</span>
+<button class="w-9 h-9 flex items-center justify-center bg-surface-container-highest text-on-surface hover:bg-primary hover:text-on-primary transition-colors font-label-md text-label-md" type="button">8</button>
+<button class="px-space-sm py-2 bg-primary-container text-on-primary hover:bg-primary font-label-sm text-label-sm uppercase tracking-wider transition-colors flex items-center gap-1 ml-2" type="button">
+              Next Looms
+              <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+</section>
+</div>
+</div>
+<!-- Trust & Authenticity Royal Banner (Full Bleed Accent) -->
+<section class="w-full bg-primary-container text-on-primary py-space-lg px-gutter-mobile lg:px-margin mt-space-lg">
+<div class="max-w-[1440px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-space-md items-center">
+<div class="flex items-center gap-space-sm">
+<div class="w-12 h-12 rounded-full bg-surface/10 flex items-center justify-center text-tertiary-fixed shrink-0">
+<span class="material-symbols-outlined text-2xl">verified_user</span>
+</div>
+<div>
+<h4 class="font-headline-sm text-headline-sm text-surface tracking-tight">Silk Mark Assured</h4>
+<p class="font-body-sm text-body-sm text-tertiary-fixed/80">Every saree dispatched with a unique encoded Silk Mark tag and governmental purity verification.</p>
+</div>
+</div>
+<div class="flex items-center gap-space-sm">
+<div class="w-12 h-12 rounded-full bg-surface/10 flex items-center justify-center text-tertiary-fixed shrink-0">
+<span class="material-symbols-outlined text-2xl">biotech</span>
+</div>
+<div>
+<h4 class="font-headline-sm text-headline-sm text-surface tracking-tight">Zari Purity Certificate</h4>
+<p class="font-body-sm text-body-sm text-tertiary-fixed/80">Includes individual laboratory test report detailing silver &amp; 24kt gold electroplating percentages.</p>
+</div>
+</div>
+<div class="flex items-center gap-space-sm">
+<div class="w-12 h-12 rounded-full bg-surface/10 flex items-center justify-center text-tertiary-fixed shrink-0">
+<span class="material-symbols-outlined text-2xl">inventory_2</span>
+</div>
+<div>
+<h4 class="font-headline-sm text-headline-sm text-surface tracking-tight">Royal Velvet Atelier Box</h4>
+<p class="font-body-sm text-body-sm text-tertiary-fixed/80">Archival muslin pouch, fragrant sandalwood sachet, and personalized calligraphed provenance note.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Mobile Filter Drawer using HTML5 <dialog> -->
+<dialog aria-label="Refine Looms and Filters" class="m-0 p-0 max-w-[340px] w-[88vw] h-[100dvh] max-h-none bg-surface text-on-surface backdrop:bg-primary/60 backdrop:backdrop-blur-sm fixed inset-y-0 right-0 shadow-2xl border-l border-tertiary-fixed/30 overflow-y-auto filter-slide-in ml-auto" id="mobile-filter-drawer">
+<div class="flex flex-col h-full p-space-md">
+<div class="flex items-center justify-between pb-space-md border-b border-outline-variant/40">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-base">tune</span>
+<span class="font-headline-sm text-headline-sm text-primary">Refine Loom</span>
+</div>
+<button aria-label="Close filter drawer" class="p-1.5 text-on-surface-variant hover:text-primary transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary" id="mobile-filter-close" type="button">
+<span class="material-symbols-outlined text-2xl">close</span>
+</button>
+</div>
+<div class="flex-grow space-y-space-md py-space-md overflow-y-auto">
+<!-- Weave Technique -->
+<div class="space-y-space-xs">
+<span class="font-title-md text-title-md text-primary block">Weave Technique</span>
+<div class="space-y-1.5 pt-1">
+<label class="flex items-center justify-between cursor-pointer"><span class="flex items-center gap-2 text-on-surface font-body-sm text-body-sm"><input checked="" class="w-4 h-4 rounded-none accent-[#4A0E17]" type="checkbox"/>Kadwa (Discontinuous Weft)</span><span class="font-label-sm text-label-sm text-on-surface-variant">14</span></label>
+<label class="flex items-center justify-between cursor-pointer"><span class="flex items-center gap-2 text-on-surface font-body-sm text-body-sm"><input class="w-4 h-4 rounded-none accent-[#4A0E17]" type="checkbox"/>Antique Jangla (Floral Vines)</span><span class="font-label-sm text-label-sm text-on-surface-variant">8</span></label>
+<label class="flex items-center justify-between cursor-pointer"><span class="flex items-center gap-2 text-on-surface font-body-sm text-body-sm"><input class="w-4 h-4 rounded-none accent-[#4A0E17]" type="checkbox"/>Shikargah (Royal Hunt Scenes)</span><span class="font-label-sm text-label-sm text-on-surface-variant">5</span></label>
+<label class="flex items-center justify-between cursor-pointer"><span class="flex items-center gap-2 text-on-surface font-body-sm text-body-sm"><input class="w-4 h-4 rounded-none accent-[#4A0E17]" type="checkbox"/>Tanchoi Multi-Silk</span><span class="font-label-sm text-label-sm text-on-surface-variant">9</span></label>
+</div>
+</div>
+<!-- Fabric Base -->
+<div class="space-y-space-xs pt-space-xs border-t border-outline-variant/30">
+<span class="font-title-md text-title-md text-primary block">Fabric Base</span>
+<div class="space-y-1.5 pt-1">
+<label class="flex items-center justify-between cursor-pointer"><span class="flex items-center gap-2 text-on-surface font-body-sm text-body-sm"><input checked="" class="w-4 h-4 rounded-none accent-[#4A0E17]" type="checkbox"/>Pure Katan Silk</span><span class="font-label-sm text-label-sm text-on-surface-variant">24</span></label>
+<label class="flex items-center justify-between cursor-pointer"><span class="flex items-center gap-2 text-on-surface font-body-sm text-body-sm"><input class="w-4 h-4 rounded-none accent-[#4A0E17]" type="checkbox"/>Organza Tissue Zari Sheer</span><span class="font-label-sm text-label-sm text-on-surface-variant">11</span></label>
+<label class="flex items-center justify-between cursor-pointer"><span class="flex items-center gap-2 text-on-surface font-body-sm text-body-sm"><input class="w-4 h-4 rounded-none accent-[#4A0E17]" type="checkbox"/>Georgette Khaddi Handspun</span><span class="font-label-sm text-label-sm text-on-surface-variant">8</span></label>
+</div>
+</div>
+<!-- Zari Purity Standard -->
+<div class="space-y-space-xs pt-space-xs border-t border-outline-variant/30">
+<span class="font-title-md text-title-md text-primary block">Zari Purity Standard</span>
+<div class="space-y-1.5 pt-1">
+<label class="flex items-center justify-between cursor-pointer"><span class="flex items-center gap-2 text-on-surface font-body-sm text-body-sm"><input checked="" class="w-4 h-4 rounded-none accent-[#4A0E17]" type="checkbox"/>Certified Real Silver Zari (98.5%)</span><span class="font-label-sm text-label-sm text-secondary font-bold">Cert.</span></label>
+<label class="flex items-center justify-between cursor-pointer"><span class="flex items-center gap-2 text-on-surface font-body-sm text-body-sm"><input checked="" class="w-4 h-4 rounded-none accent-[#4A0E17]" type="checkbox"/>Tested Pure Gold Dipped</span><span class="font-label-sm text-label-sm text-secondary font-bold">Cert.</span></label>
+</div>
+</div>
+</div>
+<div class="mt-auto pt-space-md border-t border-outline-variant/30 flex gap-space-xs">
+<button class="w-1/2 py-2.5 bg-surface-container-high text-on-surface font-label-md text-label-md uppercase tracking-wider text-center" id="mobile-filter-reset" type="button">Reset</button>
+<button class="w-1/2 py-2.5 bg-primary-container text-on-primary font-label-md text-label-md uppercase tracking-wider text-center shadow-md" id="mobile-filter-apply" type="button">Apply (6)</button>
+</div>
+</div>
+</dialog>
+
+<!-- Interactive Script for Navigation Drawer, Filter Drawer & Catalog Reordering -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Mobile Nav Drawer
+      const mobileNavDrawer = document.getElementById('mobile-nav-drawer');
+      const mobileNavToggle = document.getElementById('mobile-nav-toggle');
+      const mobileNavClose = document.getElementById('mobile-nav-close');
+
+      if (mobileNavToggle && mobileNavDrawer) {
+        mobileNavToggle.addEventListener('click', () => {
+          mobileNavDrawer.showModal();
+          mobileNavToggle.setAttribute('aria-expanded', 'true');
+        });
+        mobileNavClose?.addEventListener('click', () => mobileNavDrawer.close());
+        mobileNavDrawer.addEventListener('close', () => {
+          mobileNavToggle.setAttribute('aria-expanded', 'false');
+          mobileNavToggle.focus();
+        });
+        mobileNavDrawer.addEventListener('click', (e) => {
+          const rect = mobileNavDrawer.getBoundingClientRect();
+          if (e.clientX < rect.left || e.clientX > rect.right || e.clientY < rect.top || e.clientY > rect.bottom) {
+            mobileNavDrawer.close();
+          }
+        });
+      }
+
+      // Mobile Filter Drawer
+      const filterDrawer = document.getElementById('mobile-filter-drawer');
+      const filterTrigger = document.getElementById('mobile-filter-trigger');
+      const filterClose = document.getElementById('mobile-filter-close');
+      const filterApply = document.getElementById('mobile-filter-apply');
+      const filterReset = document.getElementById('mobile-filter-reset');
+
+      if (filterTrigger && filterDrawer) {
+        filterTrigger.addEventListener('click', () => {
+          filterDrawer.showModal();
+          filterTrigger.setAttribute('aria-expanded', 'true');
+        });
+        filterClose?.addEventListener('click', () => filterDrawer.close());
+        filterApply?.addEventListener('click', () => filterDrawer.close());
+        filterReset?.addEventListener('click', () => filterDrawer.close());
+        filterDrawer.addEventListener('close', () => {
+          filterTrigger.setAttribute('aria-expanded', 'false');
+          filterTrigger.focus();
+        });
+        filterDrawer.addEventListener('click', (e) => {
+          const rect = filterDrawer.getBoundingClientRect();
+          if (e.clientX < rect.left || e.clientX > rect.right || e.clientY < rect.top || e.clientY > rect.bottom) {
+            filterDrawer.close();
+          }
+        });
+      }
+
+      const sortSelect = document.getElementById('catalog-sort');
+      if (sortSelect) {
+        sortSelect.addEventListener('change', function(e) {
+          console.log('Catalog reordered by: ' + e.target.value);
+        });
+      }
+    });
+  </script>
+</div></main><footer class="w-full bg-surface-container-low mt-space-xl"><div class="max-w-[1440px] mx-auto px-gutter-mobile lg:px-margin pt-space-xl pb-space-lg"><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-space-lg mb-space-xl"><div class="flex flex-col gap-space-sm"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-secondary text-headline-sm">verified</span><span class="font-label-md text-label-md text-primary uppercase tracking-widest font-bold">Silk Mark India Assured</span></div><p class="font-body-sm text-body-sm text-on-surface-variant">Every heirloom warp and weft is lab-tested and certified pure mulberry, tussar, and zari weaves, accompanied by our master artisan certificate of authenticity.</p><div class="pt-space-xs"><span class="inline-block bg-surface-container px-space-sm py-1 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">GI Tagged Provenance</span></div></div><div class="flex flex-col gap-space-sm"><h3 class="font-headline-sm text-headline-sm text-primary">Bespoke Bridal Salon</h3><p class="font-body-sm text-body-sm text-on-surface-variant">Schedule a private one-on-one virtual or in-person trousseau drape consultation with our royal couture archivists.</p><a class="inline-flex items-center gap-space-xs font-label-md text-label-md text-primary uppercase tracking-wider font-semibold hover:text-on-primary-container transition-colors" data-path="bridal-consultation" href="#">Book Atelier Private Drape<span class="material-symbols-outlined text-base">arrow_forward</span></a></div><div class="flex flex-col gap-space-sm"><h3 class="font-headline-sm text-headline-sm text-primary">Curated Collections</h3><ul class="flex flex-col gap-space-xs"><li role="none"><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="kanjeevaram-silks" href="#">Bridal Kanjeevaram Silks</a></li><li role="none"><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="banarasi-brocades" href="#">Varanasi Antique Jangla &amp; Shikargah</a></li><li role="none"><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="handloom-organza" href="#">Zardozi-Embroidered Sheer Organzas</a></li><li role="none"><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="heritage-weaves" href="#">Patan Patola &amp; Paithani Archives</a></li></ul></div><div class="flex flex-col gap-space-sm"><h3 class="font-headline-sm text-headline-sm text-primary">Private Previews</h3><p class="font-body-sm text-body-sm text-on-surface-variant">Receive sealed invitations to private weave debuts, trunk shows, and bespoke loom reservations.</p><form class="flex flex-col gap-space-xs"><input class="bg-surface-container-lowest px-space-sm py-2 text-on-surface font-body-sm text-body-sm rounded-none focus:outline-none" placeholder="Your Royal Dispatch Email" type="email"/><button class="bg-primary-container text-on-primary font-label-md text-label-md uppercase tracking-widest py-2 px-space-md hover:bg-primary transition-colors" type="button">Request Gazette Access</button></form></div></div><div class="pt-space-lg flex flex-col md:flex-row items-center justify-between gap-space-md"><p class="font-body-sm text-body-sm text-on-surface-variant">© 2024 Kala Virasat Royal Handlooms. Crafted for Discerning Heirs &amp; Global Connoisseurs.</p><div class="flex flex-wrap items-center gap-space-md"><a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary uppercase tracking-wider transition-colors" data-path="custom-fall-pico-policy" href="#">Fall &amp; Pico Policy</a><a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary uppercase tracking-wider transition-colors" data-path="royal-trousseau-shipping" href="#">Complimentary Global Transit</a><a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary uppercase tracking-wider transition-colors" data-path="certificate-verification" href="#">Silk Mark Certificate</a><a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary uppercase tracking-wider transition-colors" data-path="terms-and-curation" href="#">Terms of Bespoke Curation</a></div></div></div></footer></body></html>

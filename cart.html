@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&amp;family=Hanken+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}
+/* Royal Luxury Micro-Interactions & Animations */
+@keyframes goldShimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes subtlePulse {
+  0%, 100% { transform: scale(1); opacity: 0.95; box-shadow: 0 0 0 0 rgba(193, 236, 215, 0.4); }
+  50% { transform: scale(1.04); opacity: 1; box-shadow: 0 0 0 6px rgba(193, 236, 215, 0); }
+}
+
+@keyframes stampSeal {
+  0% { transform: scale(2.2) rotate(-15deg); opacity: 0; }
+  60% { transform: scale(0.92) rotate(3deg); opacity: 1; }
+  80% { transform: scale(1.05) rotate(-1deg); }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+@keyframes floatGentle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+@keyframes toastSlide {
+  0% { transform: translateY(100%) scale(0.95); opacity: 0; }
+  100% { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+@keyframes numFlip {
+  0% { transform: translateY(-4px); opacity: 0.5; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+.num-animate {
+  animation: numFlip 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.shimmer-btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer-btn::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -60%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    60deg,
+    rgba(255, 222, 165, 0) 20%,
+    rgba(255, 222, 165, 0.25) 50%,
+    rgba(255, 222, 165, 0) 80%
+  );
+  transform: rotate(25deg);
+  transition: transform 0.75s ease;
+  pointer-events: none;
+}
+
+.shimmer-btn:hover::after {
+  transform: rotate(25deg) translate(50%, 50%);
+}
+
+.luxury-card {
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.luxury-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px -5px rgba(74, 14, 23, 0.08), 0 8px 10px -6px rgba(42, 0, 6, 0.04);
+}
+
+.custom-input {
+  transition: all 0.25s ease;
+}
+
+.custom-input:focus {
+  outline: none;
+  border-bottom: 2px solid #93474d;
+  background-color: #ffffff;
+  box-shadow: 0 2px 8px -2px rgba(147, 71, 77, 0.15);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, ::after, ::before {
+    animation-duration: 0.001s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001s !important;
+  }
+}
+dialog:modal { overscroll-behavior: contain; }
+dialog::backdrop { overflow: hidden; overscroll-behavior: contain; }
+@keyframes slideInLeft { from { transform: translateX(-100%); } to { transform: translateX(0); } }
+.drawer-slide-in { animation: slideInLeft 0.28s cubic-bezier(0.16, 1, 0.3, 1); }
+input:user-invalid { border-color: #ba1a1a !important; background-color: rgba(255, 218, 214, 0.2) !important; }
+</style><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"outline-variant":"#d9c1c1","on-surface-variant":"#544343","outline":"#867273","secondary-fixed-dim":"#a5d0bc","error":"#ba1a1a","inverse-on-surface":"#f6f0ea","on-secondary-container":"#436a5a","inverse-primary":"#ffb3b6","on-secondary-fixed":"#002116","secondary-container":"#bee9d4","tertiary-container":"#322200","tertiary":"#170e00","secondary-fixed":"#c1ecd7","inverse-surface":"#32302d","on-primary-fixed-variant":"#763037","primary":"#2a0006","on-tertiary-fixed":"#261900","on-secondary-fixed-variant":"#274e3f","tertiary-fixed":"#ffdea5","on-secondary":"#ffffff","on-background":"#1d1b18","on-primary-fixed":"#3d040e","on-error":"#ffffff","surface-container-high":"#ede7e2","on-primary-container":"#ca7379","surface-container-low":"#f9f2ed","secondary":"#3f6656","on-tertiary":"#ffffff","on-surface":"#1d1b18","primary-fixed-dim":"#ffb3b6","surface-container":"#f3ede7","surface":"#fff8f3","primary-container":"#4a0e17","surface-dim":"#dfd9d4","background":"#fff8f3","on-error-container":"#93000a","on-tertiary-container":"#a98742","on-primary":"#ffffff","tertiary-fixed-dim":"#e9c176","surface-container-highest":"#e7e1dc","surface-tint":"#93474d","error-container":"#ffdad6","primary-fixed":"#ffdada","surface-bright":"#fff8f3","on-tertiary-fixed-variant":"#5d4201","surface-variant":"#e7e1dc"},borderRadius:{DEFAULT:"0.25rem",lg:"0.5rem",xl:"0.75rem",full:"9999px"},spacing:{margin:"3rem","space-xs":"0.25rem","space-sm":"0.5rem","margin-mobile":"1.25rem","space-xl":"3rem","space-lg":"1.75rem","gutter-mobile":"1rem",gutter:"1.5rem","space-md":"1rem"},fontFamily:{"display-md":["Playfair Display"],"label-sm":["Hanken Grotesk"],"headline-lg-mobile":["Playfair Display"],"headline-sm":["Playfair Display"],"body-md":["Hanken Grotesk"],"display-md-mobile":["Playfair Display"],"label-md":["Hanken Grotesk"],"body-lg":["Hanken Grotesk"],"headline-lg":["Playfair Display"],"display-lg-mobile":["Playfair Display"],"title-md":["Hanken Grotesk"],"display-lg":["Playfair Display"],"body-sm":["Hanken Grotesk"]},fontSize:{"display-md":["40px",{lineHeight:"48px",letterSpacing:"-0.01em",fontWeight:"500"}],"label-sm":["10px",{lineHeight:"14px",letterSpacing:"0.16em",fontWeight:"700"}],"headline-lg-mobile":["24px",{lineHeight:"32px",letterSpacing:"0em",fontWeight:"500"}],"headline-sm":["20px",{lineHeight:"28px",letterSpacing:"0.01em",fontWeight:"600"}],"body-md":["15px",{lineHeight:"24px",letterSpacing:"0.01em",fontWeight:"400"}],"display-md-mobile":["30px",{lineHeight:"36px",letterSpacing:"0em",fontWeight:"500"}],"label-md":["12px",{lineHeight:"16px",letterSpacing:"0.12em",fontWeight:"600"}],"body-lg":["18px",{lineHeight:"28px",letterSpacing:"0.01em",fontWeight:"400"}],"headline-lg":["32px",{lineHeight:"40px",letterSpacing:"0em",fontWeight:"500"}],"display-lg-mobile":["38px",{lineHeight:"44px",letterSpacing:"-0.01em",fontWeight:"600"}],"title-md":["16px",{lineHeight:"24px",letterSpacing:"0.04em",fontWeight:"600"}],"display-lg":["56px",{lineHeight:"64px",letterSpacing:"-0.02em",fontWeight:"600"}],"body-sm":["13px",{lineHeight:"20px",letterSpacing:"0.02em",fontWeight:"400"}]}}}}</script></head><body class="bg-surface font-body-md text-on-surface antialiased"><header class="fixed top-0 left-0 right-0 z-50 bg-surface/95 backdrop-blur-xl shadow-[0_12px_32px_-4px_rgba(74,14,23,0.08),0_4px_12px_-2px_rgba(28,26,23,0.04)]"><div class="bg-primary-container px-space-md py-space-xs text-center"><p class="text-tertiary-fixed font-label-sm uppercase tracking-widest">Complimentary Worldwide Express Delivery on Royal Heirloom Orders &amp; Custom Fall/Pico Stitching</p></div><div class="h-20 max-w-[1440px] mx-auto px-gutter-mobile lg:px-margin flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-md"><button aria-controls="mobile-nav-drawer" aria-expanded="false" aria-haspopup="dialog" aria-label="Open Navigation Directory" class="xl:hidden p-1.5 -ml-1 text-on-surface hover:text-primary transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary" id="mobile-nav-toggle" type="button"><span class="material-symbols-outlined text-2xl">menu</span></button><img alt="KalaVirasat Royal Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ALJJyrDjRUMVJ8BGwAL3MTGBtfOEGLbHtTGX_fJXgOJnrNgN3RmOGoo3yfTqlXjTWCawFvt1vdqYt5NgjgX_NVI0ikE7m28LxCyEF3jN-BdsLWpRtLOrvPUxpSvZn27pfMeRzVPOvu_xfHdgdXjvUesi23CqcNRbKoe91dXhALRLT2jHZjQu82CCMbM1Bk8WfbRETibWeqPXkzzgE7-0kSE7chgBHBBFzXVTVKuVlG93ThS08w"/><div class="hidden sm:flex flex-col"><span class="font-headline-sm text-headline-sm text-primary leading-none tracking-tight">KALA VIRASAT</span><span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest mt-1">Haute Saree Atelier</span></div></div><nav class="hidden xl:flex items-center gap-space-lg" data-active-classes="text-primary font-bold border-b border-tertiary-container"><a aria-current="page" class="uppercase tracking-wider transition-colors py-1 text-primary font-bold border-b border-tertiary-container" data-path="heritage-weaves" href="#">Heritage Weaves</a><a class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant hover:text-primary transition-colors py-1" data-path="banarasi-brocades" href="#">Banarasi Brocades</a><a class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant hover:text-primary transition-colors py-1" data-path="kanjeevaram-silks" href="#">Kanjeevaram Silks</a><a class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant hover:text-primary transition-colors py-1" data-path="bridal-trousseau" href="#">Bridal Troussseau</a><a class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant hover:text-primary transition-colors py-1" data-path="handloom-organza" href="#">Handloom Organza</a><a class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant hover:text-primary transition-colors py-1" data-path="atelier-story" href="#">Atelier Story</a></nav><div class="flex items-center gap-space-sm sm:gap-space-md"><div class="relative inline-block text-left"><select class="appearance-none bg-surface-container-low text-on-surface font-label-md text-label-md uppercase px-space-sm py-1 pr-6 rounded-none cursor-pointer focus:outline-none transition-colors hover:bg-surface-container"><option value="INR">INR (₹)</option><option value="USD">USD ($)</option><option value="GBP">GBP (£)</option><option value="AED">AED (د.إ)</option></select><span class="material-symbols-outlined absolute right-1 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none text-base">expand_more</span></div><button aria-label="Search Catalog" class="p-1 text-on-surface-variant hover:text-primary transition-transform active:scale-95" type="button"><span class="material-symbols-outlined">search</span></button><a class="relative p-1 text-on-surface-variant hover:text-primary transition-transform active:scale-95" data-path="wishlist" href="#"><span class="material-symbols-outlined">favorite</span><span class="absolute -top-1 -right-1 bg-secondary text-on-secondary font-label-sm text-label-sm w-4 h-4 rounded-full flex items-center justify-center transition-transform hover:scale-110">3</span></a><button aria-label="View Cart Atelier" class="relative p-1 text-on-surface-variant hover:text-primary transition-transform active:scale-95" type="button"><span class="material-symbols-outlined">shopping_bag</span><span class="absolute -top-1 -right-1 bg-primary-container text-on-primary font-label-sm text-label-sm w-4 h-4 rounded-full flex items-center justify-center" id="cart-counter-badge">2</span></button><div class="pl-space-xs"><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-1 ring-tertiary-fixed-dim hover:ring-2 transition-all cursor-pointer" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAqwKASWehxAg2REqsT-834p9BKIpt3m38-Svm1woQ5co21ogSBuhB7AxFY1eaH9YgVMA9MzCtnk-k3_JvU1u5C18b8yJbQmEiShF42UBIaON8bNuX86Dco3Wi3faDRb6KueLKtPEi9VpmTlD8z63k9hvLDW6dlhcB6ZbHNJ2GQiYsVBh_7trq4657JHl4PvFJ5Iy9venQ3TvLQGjZoXFAcQld0ibfezX1ALYUVt1yg"/></div></div></div></header>
+<!-- Mobile Navigation Drawer using HTML5 <dialog> -->
+<dialog aria-label="Atelier Navigation Menu" class="m-0 p-0 max-w-[320px] w-[85vw] h-[100dvh] max-h-none bg-surface text-on-surface backdrop:bg-primary/60 backdrop:backdrop-blur-sm fixed inset-y-0 left-0 shadow-2xl border-r border-tertiary-fixed/30 overflow-y-auto drawer-slide-in" id="mobile-nav-drawer">
+<div class="flex flex-col h-full p-space-md">
+<div class="flex items-center justify-between pb-space-md border-b border-outline-variant/40">
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-primary">KALA VIRASAT</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest">Royal Directory</span>
+</div>
+<button aria-label="Close navigation menu" class="p-1.5 text-on-surface-variant hover:text-primary transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary" id="mobile-nav-close" type="button">
+<span class="material-symbols-outlined text-2xl">close</span>
+</button>
+</div>
+<nav aria-label="Mobile Collections" class="flex flex-col gap-space-sm py-space-lg">
+<a class="py-2 px-space-xs font-label-md text-label-md uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors pl-3" href="index.html">Homepage</a>
+<a class="py-2 px-space-xs font-label-md text-label-md uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors pl-3" href="collection.html">Banarasi Brocades</a>
+<a class="py-2 px-space-xs font-label-md text-label-md uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors pl-3" href="#">Kanjeevaram Silks</a>
+<a class="py-2 px-space-xs font-label-md text-label-md uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors pl-3" href="product.html">Bridal Trousseau</a>
+<a class="py-2 px-space-xs font-label-md text-label-md uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors pl-3" href="#">Handloom Organza</a>
+<a class="py-2 px-space-xs font-label-md text-label-md uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors pl-3" href="#">Atelier Story</a>
+</nav>
+<div class="mt-auto pt-space-md border-t border-outline-variant/30 flex flex-col gap-space-xs text-on-surface-variant">
+<div class="flex items-center gap-2 text-primary font-title-md text-title-md">
+<span class="material-symbols-outlined text-base">support_agent</span>
+<span>Patron Concierge</span>
+</div>
+<p class="font-body-sm text-body-sm">Direct Line: +91 98100 23456</p>
+<p class="font-label-sm text-label-sm text-secondary uppercase font-semibold">Master Drapists Available</p>
+</div>
+</div>
+</dialog>
+<main class="w-full pt-28 bg-surface min-h-[calc(100vh-280px)]"><div class="flex flex-col w-full">
+<!-- Subtle decorative ambient glow container -->
+<div class="relative w-full max-w-[1440px] mx-auto px-gutter-mobile lg:px-margin py-space-md lg:py-space-lg">
+<!-- Atelier Progression & Security Banner with Active Countdown Timer & Loom Pulse -->
+<div class="mb-space-md flex flex-col md:flex-row md:items-center justify-between gap-space-sm pb-space-sm bg-surface-container-low p-space-md shadow-sm border-l-4 border-primary relative overflow-hidden">
+<div class="absolute -right-16 -top-16 w-36 h-36 bg-tertiary-fixed/10 rounded-full blur-2xl pointer-events-none"></div>
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 bg-primary-container text-tertiary-fixed flex items-center justify-center shadow-md relative">
+<span class="material-symbols-outlined text-xl transition-transform duration-300 group-hover:rotate-12" style="font-variation-settings: 'FILL' 1;">lock</span>
+<span class="absolute -top-1 -right-1 w-2.5 h-2.5 bg-secondary rounded-full animate-ping"></span>
+<span class="absolute -top-1 -right-1 w-2.5 h-2.5 bg-secondary rounded-full"></span>
+</div>
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest block">Atelier Private Checkout Session</span>
+<p class="font-title-md text-title-md text-primary flex items-center gap-2">
+<span>Reserved Heirloom Silks</span> • 
+  <span class="text-secondary font-semibold font-mono tracking-wide bg-surface-container px-2 py-0.5 rounded flex items-center gap-1 shadow-inner">
+<span class="material-symbols-outlined text-xs animate-spin" style="animation-duration: 6s;">timer</span>
+<span id="countdown-timer">18:42</span> Held
+  </span>
+</p>
+</div>
+</div>
+<div class="flex items-center gap-space-md text-on-surface-variant font-label-md text-label-md uppercase tracking-wider">
+<span class="inline-flex items-center gap-1 text-secondary font-medium">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">verified</span>
+          100% Silk Mark Certified
+        </span>
+<span class="hidden sm:inline">•</span>
+<span class="inline-flex items-center gap-1 hover:text-primary transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-sm">local_shipping</span>
+          Complimentary Royal Transit
+        </span>
+</div>
+</div>
+<!-- Main Split Checkout Workspace -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-start">
+<!-- LEFT COLUMN: Cart Review & Heritage Packaging (7 Columns) -->
+<div class="lg:col-span-7 flex flex-col gap-space-lg">
+<!-- Cart Items Section -->
+<div class="bg-surface-container-lowest p-space-md lg:p-space-lg shadow-sm border border-surface-container transition-all">
+<div class="flex items-center justify-between pb-space-sm border-b border-surface-container">
+<h2 class="font-headline-sm text-headline-sm text-primary flex items-center gap-2">
+<span>Haute Handloom Selection</span>
+<span class="font-label-sm text-label-sm bg-surface-container text-on-surface-variant px-2 py-0.5 ml-2 rounded-sm" id="cart-item-count-label">2 Masterpieces</span>
+</h2>
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-widest font-semibold flex items-center gap-1.5 bg-secondary-fixed/30 px-2.5 py-1 rounded-full">
+<span class="w-2 h-2 rounded-full bg-secondary inline-block animate-ping"></span>
+<span class="w-2 h-2 -ml-3.5 rounded-full bg-secondary inline-block"></span> Looms Reserved
+            </span>
+</div>
+<!-- Product Item 1 -->
+<div class="py-space-md flex flex-col sm:flex-row gap-space-md items-start transition-all duration-300 luxury-card p-2 rounded-none hover:bg-surface-container-low/40 relative group border-b border-surface-container" id="cart-item-1">
+<div class="relative w-full sm:w-36 h-48 sm:h-44 flex-shrink-0 bg-surface-container-low overflow-hidden shadow-inner">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Close-up shot of a royal crimson Maharani Banarasi silk saree with opulent real gold zari floral kadwa weave jaal. Luxurious texture draped gracefully on an ivory pedestal under warm museum spotlight with deep shadows." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYH3zmWXFSkLwDgyAkGZa06_-T9PvM8mAgAHk6op2DarIUQH_UwYIH-_k1cX86qMoM4AeRxHTUGxcqSwiMOg2pFIpayKxn9mHEBLGvg6Ugu0nh0YHyTizbLVEkSQYnbqIOxYDdlIIN_vik8nmVMMdfyqpAHpM9vXgX9vo6oTLJ-Xf5zmcb607GtC2H6Cm650fD56x2ERBFPUIPm7C3duop7mdctcyM82y_zuiIlY3V"/>
+<span class="absolute top-2 left-2 bg-primary text-tertiary-fixed font-label-sm text-label-sm px-2 py-0.5 tracking-wider uppercase shadow-md">Varanasi Brocade</span>
+</div>
+<div class="flex flex-col justify-between flex-grow w-full">
+<div>
+<div class="flex items-start justify-between gap-space-sm">
+<div>
+<h3 class="font-title-md text-title-md text-primary group-hover:text-primary-container transition-colors">Maharani Shonar Katan Banarasi Saree</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mt-0.5">Shikargah Weave • Pure Raktambari Crimson with 24K Electroplated Zari</p>
+</div>
+<span class="font-title-md text-title-md text-primary font-semibold whitespace-nowrap transition-transform duration-200" id="item-1-price">₹1,45,000</span>
+</div>
+<!-- Tailoring Specs -->
+<div class="mt-space-sm bg-surface-container-low p-space-xs flex flex-wrap items-center gap-x-space-md gap-y-1 font-body-sm text-body-sm text-on-surface-variant border-l-2 border-secondary/50">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-xs text-secondary">check</span> Fall &amp; Pico Hand-Stitched (Complimentary)</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-xs text-secondary">check</span> Unstitched Blouse Piece (1 Meter Pure Silk)</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-xs text-secondary">check</span> Hand-knotted Tassels (Zhalar)</span>
+</div>
+</div>
+<!-- Controls -->
+<div class="flex items-center justify-between mt-space-md pt-space-xs">
+<div class="flex items-center bg-surface-container px-2 py-1 gap-space-sm shadow-inner rounded-sm border border-outline-variant/40">
+<button aria-label="Decrease quantity" class="text-on-surface-variant hover:text-primary transition-transform active:scale-90 flex items-center justify-center w-6 h-6 hover:bg-surface-container-high rounded" onclick="adjustQty('item-1-qty', -1, 145000, 'item-1-price')" type="button">
+<span class="material-symbols-outlined text-sm font-bold">remove</span>
+</button>
+<span class="font-label-md text-label-md font-bold px-2 text-primary select-none inline-block min-w-[1.25rem] text-center" id="item-1-qty">1</span>
+<button aria-label="Increase quantity" class="text-on-surface-variant hover:text-primary transition-transform active:scale-90 flex items-center justify-center w-6 h-6 hover:bg-surface-container-high rounded" onclick="adjustQty('item-1-qty', 1, 145000, 'item-1-price')" type="button">
+<span class="material-symbols-outlined text-sm font-bold">add</span>
+</button>
+</div>
+<div class="flex items-center gap-space-md">
+<button class="text-on-surface-variant hover:text-primary text-body-sm font-body-sm flex items-center gap-1 transition-all group/btn" onclick="toggleTrousseauWish(this)" type="button">
+<span class="material-symbols-outlined text-base transition-transform duration-200 group-hover/btn:scale-125 trousseau-icon">favorite</span>
+<span class="hidden sm:inline trousseau-label">Save for Trousseau</span>
+</button>
+<button class="text-error hover:text-on-error-container text-body-sm font-body-sm flex items-center gap-1 transition-all hover:bg-error-container/20 px-2 py-1 rounded" onclick="removeItem('cart-item-1', 'Maharani Shonar Katan')" type="button">
+<span class="material-symbols-outlined text-base">delete</span>
+<span>Remove</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Product Item 2 -->
+<div class="py-space-md flex flex-col sm:flex-row gap-space-md items-start transition-all duration-300 luxury-card p-2 rounded-none hover:bg-surface-container-low/40 relative group" id="cart-item-2">
+<div class="relative w-full sm:w-36 h-48 sm:h-44 flex-shrink-0 bg-surface-container-low overflow-hidden shadow-inner">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Regal emerald green pure mulberry Kanchipuram silk saree folded symmetrically with rich ruby red temple korvai border and solid gold zari peacock motifs in subtle low-angle daylight." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNMibIKiN7dMwgqdsTpCL9f45t8VCYxGysZ5IMVFV5NdXXIXyZH1PV0VpCg8wUmrP-IxXkeN4RaOnmsFpX4J3Xenl68jJvvKpLaHuwwNiyBGtOTc-keIct47ZzK0NQvy4clM4Kc0YXN9nUKkQJ1jVuJoAlwUYueEC_VSXd6KDKeXcVlWRcesJTNydrwRfrbW3kH1z_-P4ZkFuHlVwVqy3TraTWdYc2a6N1Ed2k6WF9"/>
+<span class="absolute top-2 left-2 bg-secondary text-on-secondary font-label-sm text-label-sm px-2 py-0.5 tracking-wider uppercase shadow-md">Kanchipuram Silk</span>
+</div>
+<div class="flex flex-col justify-between flex-grow w-full">
+<div>
+<div class="flex items-start justify-between gap-space-sm">
+<div>
+<h3 class="font-title-md text-title-md text-primary group-hover:text-primary-container transition-colors">Rajkumari Kanchipuram Emerald Pure Silk</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mt-0.5">Heavy Korvai Temple Weave • Mayil (Peacock) &amp; Rudraksha Borders</p>
+</div>
+<span class="font-title-md text-title-md text-primary font-semibold whitespace-nowrap transition-transform duration-200" id="item-2-price">₹98,000</span>
+</div>
+<!-- Tailoring Specs -->
+<div class="mt-space-sm bg-surface-container-low p-space-xs flex flex-wrap items-center gap-x-space-md gap-y-1 font-body-sm text-body-sm text-on-surface-variant border-l-2 border-secondary/50">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-xs text-secondary">check</span> Fall &amp; Pico Hand-Finished (Complimentary)</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-xs text-secondary">check</span> Contrasting Crimson Blouse Piece</span>
+</div>
+</div>
+<!-- Controls -->
+<div class="flex items-center justify-between mt-space-md pt-space-xs">
+<div class="flex items-center bg-surface-container px-2 py-1 gap-space-sm shadow-inner rounded-sm border border-outline-variant/40">
+<button aria-label="Decrease quantity" class="text-on-surface-variant hover:text-primary transition-transform active:scale-90 flex items-center justify-center w-6 h-6 hover:bg-surface-container-high rounded" onclick="adjustQty('item-2-qty', -1, 98000, 'item-2-price')" type="button">
+<span class="material-symbols-outlined text-sm font-bold">remove</span>
+</button>
+<span class="font-label-md text-label-md font-bold px-2 text-primary select-none inline-block min-w-[1.25rem] text-center" id="item-2-qty">1</span>
+<button aria-label="Increase quantity" class="text-on-surface-variant hover:text-primary transition-transform active:scale-90 flex items-center justify-center w-6 h-6 hover:bg-surface-container-high rounded" onclick="adjustQty('item-2-qty', 1, 98000, 'item-2-price')" type="button">
+<span class="material-symbols-outlined text-sm font-bold">add</span>
+</button>
+</div>
+<div class="flex items-center gap-space-md">
+<button class="text-on-surface-variant hover:text-primary text-body-sm font-body-sm flex items-center gap-1 transition-all group/btn" onclick="toggleTrousseauWish(this)" type="button">
+<span class="material-symbols-outlined text-base transition-transform duration-200 group-hover/btn:scale-125 trousseau-icon">favorite</span>
+<span class="hidden sm:inline trousseau-label">Save for Trousseau</span>
+</button>
+<button class="text-error hover:text-on-error-container text-body-sm font-body-sm flex items-center gap-1 transition-all hover:bg-error-container/20 px-2 py-1 rounded" onclick="removeItem('cart-item-2', 'Rajkumari Kanchipuram')" type="button">
+<span class="material-symbols-outlined text-base">delete</span>
+<span>Remove</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Royal Complimentary Inclusions & Packaging Options -->
+<div class="bg-surface-container-lowest p-space-md lg:p-space-lg shadow-sm border border-surface-container">
+<div class="flex items-center justify-between pb-space-sm">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-primary">Royal Packaging &amp; Preservation</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Complimentary archival packaging to safeguard gold zari for generations</p>
+</div>
+<span class="material-symbols-outlined text-secondary text-2xl transition-transform hover:scale-110" style="font-variation-settings: 'FILL' 1;">inventory_2</span>
+</div>
+<!-- Included Heritage Essentials Interactive Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-sm mt-space-md" id="packaging-grid">
+<div class="bg-surface-container-low p-space-sm flex flex-col justify-between cursor-pointer border border-tertiary-fixed-dim/40 hover:border-secondary transition-all rounded-none relative group luxury-card ring-1 ring-secondary/20" onclick="togglePackagingSelect(this)">
+<div class="absolute top-2 right-2 w-5 h-5 rounded-full bg-secondary text-on-secondary flex items-center justify-center text-xs shadow-sm transition-transform duration-200 group-hover:scale-110">
+<span class="material-symbols-outlined text-xs">check</span>
+</div>
+<div class="flex items-center gap-space-xs text-primary mb-1">
+<span class="material-symbols-outlined text-lg text-secondary">verified</span>
+<span class="font-label-md text-label-md uppercase tracking-wider font-semibold">Hardwood Box</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Carved teakwood heirloom box with aged brass clasp.</p>
+<span class="font-label-sm text-label-sm text-secondary mt-2 font-bold uppercase tracking-wider flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> Selected Free
+</span>
+</div>
+<div class="bg-surface-container-low p-space-sm flex flex-col justify-between cursor-pointer border border-tertiary-fixed-dim/40 hover:border-secondary transition-all rounded-none relative group luxury-card ring-1 ring-secondary/20" onclick="togglePackagingSelect(this)">
+<div class="absolute top-2 right-2 w-5 h-5 rounded-full bg-secondary text-on-secondary flex items-center justify-center text-xs shadow-sm transition-transform duration-200 group-hover:scale-110">
+<span class="material-symbols-outlined text-xs">check</span>
+</div>
+<div class="flex items-center gap-space-xs text-primary mb-1">
+<span class="material-symbols-outlined text-lg text-secondary">spa</span>
+<span class="font-label-md text-label-md uppercase tracking-wider font-semibold">Muslin &amp; Cedar</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Breathable unbleached cotton bag &amp; fragrant cedar spheres.</p>
+<span class="font-label-sm text-label-sm text-secondary mt-2 font-bold uppercase tracking-wider flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> Selected Free
+</span>
+</div>
+<div class="bg-surface-container-low p-space-sm flex flex-col justify-between cursor-pointer border border-tertiary-fixed-dim/40 hover:border-secondary transition-all rounded-none relative group luxury-card ring-1 ring-secondary/20" onclick="togglePackagingSelect(this)">
+<div class="absolute top-2 right-2 w-5 h-5 rounded-full bg-secondary text-on-secondary flex items-center justify-center text-xs shadow-sm transition-transform duration-200 group-hover:scale-110">
+<span class="material-symbols-outlined text-xs">check</span>
+</div>
+<div class="flex items-center gap-space-xs text-primary mb-1">
+<span class="material-symbols-outlined text-lg text-secondary">workspace_premium</span>
+<span class="font-label-md text-label-md uppercase tracking-wider font-semibold">Silk Mark India</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Signed certificate &amp; master weaver portrait dossier.</p>
+<span class="font-label-sm text-label-sm text-secondary mt-2 font-bold uppercase tracking-wider flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> Selected Free
+</span>
+</div>
+</div>
+<!-- Royal Gift Calligraphy Message with Wax Seal Interaction -->
+<div class="mt-space-md pt-space-sm border-t border-surface-container">
+<label class="flex items-center gap-space-xs cursor-pointer select-none group">
+<input class="w-4 h-4 text-primary rounded-none border-outline bg-surface focus:ring-0 cursor-pointer transition-transform group-hover:scale-105" id="gift-toggle" onchange="toggleGiftCard()" type="checkbox"/>
+<span class="font-label-md text-label-md text-primary uppercase tracking-wider font-semibold group-hover:text-primary-container transition-colors flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base text-tertiary-fixed-dim" style="font-variation-settings: 'FILL' 1;">history_edu</span>
+  Add Royal Calligraphy Gift Inscription (Wax Sealed)
+</span>
+</label>
+<!-- Parchment Wax Seal Container -->
+<div class="hidden mt-space-sm transition-all duration-500 overflow-hidden" id="gift-card-field">
+<div class="bg-[#faf5ee] border border-[#d6c7b2] p-space-md relative shadow-inner">
+<div class="flex items-start justify-between gap-space-sm mb-2">
+<div class="flex items-center gap-2 text-primary font-headline-sm italic text-base">
+<span class="material-symbols-outlined text-tertiary-fixed-variant text-lg">edit_note</span>
+      Royal Scribe Parchment • Hand-Penned in Gold Leaf
+    </div>
+<!-- Interactive Wax Seal Badge -->
+<div class="relative group/seal cursor-pointer" onclick="reStampSeal()" title="Royal Atelier Wax Seal">
+<div class="w-10 h-10 rounded-full bg-[#82181a] text-[#f8d488] shadow-md flex items-center justify-center border-2 border-[#b02226] transform transition-transform duration-300 hover:rotate-12" id="wax-seal-badge">
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">military_tech</span>
+</div>
+<span class="absolute -bottom-4 right-0 font-label-sm text-[9px] uppercase tracking-tighter text-[#82181a] font-bold whitespace-nowrap">Wax Sealed</span>
+</div>
+</div>
+<textarea class="w-full bg-white/70 text-on-surface font-body-sm text-body-sm p-space-sm rounded-none focus:outline-none focus:ring-1 focus:ring-primary-container placeholder:text-on-surface-variant/60 border border-[#e2d5c3] resize-none" placeholder="Enter recipient's full royal salutation and heartfelt bridal blessings..." rows="3"></textarea>
+<div class="flex items-center justify-between mt-2 pt-2 border-t border-[#e2d5c3]/60 text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider">
+<span>Inspected &amp; Hand-Sealed by Atelier Guild</span>
+<span class="text-secondary font-bold">Complimentary Blessing</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Master Weaver Heritage Note & Map -->
+<div class="bg-surface-container p-space-md flex flex-col sm:flex-row items-center gap-space-md shadow-sm border-l-4 border-tertiary-fixed-dim">
+<div class="w-full sm:w-28 h-28 flex-shrink-0 bg-surface-container-highest overflow-hidden group cursor-pointer">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Portrait of an elderly Indian master silk handloom weaver at his wooden loom in Varanasi with skeins of lustrous raw gold and crimson silk thread in atmospheric artisan lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBxwB1QBNIbVJjp_4wxG6kMvJY7PxsdrpMyRraXwYIZhkVnscglvTBza6yoEChArji5Q86nfviRV0E4Awlye52rQIPlgmY0FsNheUU_tath6icGrI3027lZe3SDeU2ld6pzD_0W0DcjCOsu-44w95ia9RnPgaPLHIII3umQbJz7VpDEQMkHhrYqIWEp-lpbpCAi9KmFU_myEARUapqkheVQgzgQrKHx51Yx6_bCTGOU"/>
+</div>
+<div class="flex-grow">
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-label-sm bg-primary text-tertiary-fixed px-2 py-0.5 tracking-wider uppercase">Artisan Direct</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Looms of Kabir Chaura, Varanasi</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface mt-1">Your order directly supports the family guild of Ustad Ramzan Ansari, a 4th-generation master weaver preserving the endangered kadwa jangla technique.</p>
+</div>
+</div>
+</div>
+<!-- RIGHT COLUMN: Streamlined Royal Checkout Panel (5 Columns) -->
+<div class="lg:col-span-5 flex flex-col gap-space-md">
+<!-- Main Checkout Box -->
+<div class="bg-surface-container-lowest p-space-md lg:p-space-lg shadow-xl relative border border-surface-container">
+<!-- Express Royal Wallets with Active Slide Indicator -->
+<div class="mb-space-md">
+<div class="text-center mb-space-xs">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest">Express Atelier Checkout</span>
+</div>
+<div class="grid grid-cols-2 gap-space-xs relative">
+<button class="w-full bg-[#5A31F4] text-white py-2.5 px-space-sm font-label-md text-label-md font-bold uppercase tracking-wider flex items-center justify-center gap-1 hover:brightness-110 active:scale-[0.98] transition-all shadow-sm" onclick="selectExpress(this, 'ShopPay')" type="button">
+<span>Shop</span><span class="bg-white text-[#5A31F4] px-1 text-xs rounded-sm">Pay</span>
+</button>
+<button class="w-full bg-black text-white py-2.5 px-space-sm font-label-md text-label-md font-bold uppercase tracking-wider flex items-center justify-center gap-1 hover:brightness-125 active:scale-[0.98] transition-all shadow-sm" onclick="selectExpress(this, 'ApplePay')" type="button">
+<span class="material-symbols-outlined text-base">file_download</span>Pay
+</button>
+</div>
+<div class="relative flex items-center justify-center my-space-sm">
+<div class="w-full h-px bg-surface-container"></div>
+<span class="bg-surface-container-lowest px-space-sm font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest relative">Or Traditional Royal Dispatch</span>
+</div>
+</div>
+<!-- Checkout Details Form -->
+<form class="flex flex-col gap-space-md" id="checkout-form" novalidate onsubmit="event.preventDefault(); completeRoyalOrder();">
+<!-- Customer Contact & VIP Atelier ID -->
+<div>
+<div class="flex items-center justify-between mb-1">
+<label class="font-label-md text-label-md text-primary uppercase tracking-wider font-semibold" for="checkout-email">Contact &amp; VIP Atelier ID <span aria-hidden="true" class="text-error">*</span></label>
+<a class="font-label-sm text-label-sm text-secondary hover:underline uppercase tracking-wider transition-colors" href="#">VIP Sign In</a>
+</div>
+<div class="relative">
+<input autocomplete="shipping email" class="w-full bg-surface-container-low text-on-surface font-body-md text-body-md px-space-sm py-2 rounded-none custom-input placeholder:text-on-surface-variant border border-transparent focus:border-primary transition-colors" id="checkout-email" name="email" placeholder="maharani.trousseau@patron.com" required="" type="email" value="maharani.trousseau@patron.com"/>
+</div>
+<div class="flex items-center gap-2 mt-2 cursor-pointer group">
+<input checked="" class="w-3.5 h-3.5 rounded-none text-primary focus:ring-0 cursor-pointer" id="whatsapp-updates" name="whatsapp_updates" type="checkbox"/>
+<label class="font-body-sm text-body-sm text-on-surface-variant cursor-pointer group-hover:text-primary transition-colors" for="whatsapp-updates">Send dispatch updates &amp; loom dispatch video on WhatsApp</label>
+</div>
+</div>
+<!-- Shipping Destination -->
+<div>
+<label class="font-label-md text-label-md text-primary uppercase tracking-wider font-semibold block mb-1" id="shipping-address-label">Royal Delivery Address</label>
+<div aria-labelledby="shipping-address-label" class="grid grid-cols-1 gap-space-xs" role="group">
+<!-- Country Selection -->
+<div class="relative">
+<label class="sr-only" for="shipping-country">Country / Sovereign Territory</label>
+<select autocomplete="shipping country" class="w-full bg-surface-container-low text-on-surface font-body-sm text-body-sm px-space-sm py-2.5 appearance-none rounded-none custom-input cursor-pointer border border-transparent focus:border-primary transition-colors" id="shipping-country" name="country">
+<option selected="" value="IN">India (Domestic Royal Transit)</option>
+<option value="US">United States of America (Express Air)</option>
+<option value="GB">United Kingdom (London Diplomatic Transit)</option>
+<option value="AE">United Arab Emirates (Dubai VIP Hand-Courier)</option>
+<option value="CA">Canada (Insured Express Transit)</option>
+<option value="SG">Singapore (Changi Insured Air)</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none text-base">expand_more</span>
+</div>
+<div class="grid grid-cols-2 gap-space-xs">
+<div>
+<label class="sr-only" for="shipping-given-name">First Name</label>
+<input autocomplete="shipping given-name" class="w-full bg-surface-container-low text-on-surface font-body-sm text-body-sm px-space-sm py-2 rounded-none custom-input border border-transparent focus:border-primary transition-colors" id="shipping-given-name" name="given-name" placeholder="First Name *" required="" type="text" value="Aaradhya"/>
+</div>
+<div>
+<label class="sr-only" for="shipping-family-name">Surname / Household Name</label>
+<input autocomplete="shipping family-name" class="w-full bg-surface-container-low text-on-surface font-body-sm text-body-sm px-space-sm py-2 rounded-none custom-input border border-transparent focus:border-primary transition-colors" id="shipping-family-name" name="family-name" placeholder="Surname *" required="" type="text" value="Singhania"/>
+</div>
+</div>
+<div>
+<label class="sr-only" for="shipping-address-line1">Palace / Villa / Estate / Flat No.</label>
+<input autocomplete="shipping address-line1" class="w-full bg-surface-container-low text-on-surface font-body-sm text-body-sm px-space-sm py-2 rounded-none custom-input border border-transparent focus:border-primary transition-colors" id="shipping-address-line1" name="address-line1" placeholder="Palace / Villa / Estate / Flat No. *" required="" type="text" value="Villa 14, Royal Palm Groves"/>
+</div>
+<div class="grid grid-cols-3 gap-space-xs">
+<div>
+<label class="sr-only" for="shipping-city">City</label>
+<input autocomplete="shipping address-level2" class="w-full bg-surface-container-low text-on-surface font-body-sm text-body-sm px-space-sm py-2 rounded-none custom-input border border-transparent focus:border-primary transition-colors" id="shipping-city" name="address-level2" placeholder="City *" required="" type="text" value="New Delhi"/>
+</div>
+<div>
+<label class="sr-only" for="shipping-state">State / Region</label>
+<input autocomplete="shipping address-level1" class="w-full bg-surface-container-low text-on-surface font-body-sm text-body-sm px-space-sm py-2 rounded-none custom-input border border-transparent focus:border-primary transition-colors" id="shipping-state" name="address-level1" placeholder="State *" required="" type="text" value="Delhi NCR"/>
+</div>
+<div>
+<label class="sr-only" for="shipping-postal-code">PIN / Postal Code</label>
+<input autocomplete="shipping postal-code" class="w-full bg-surface-container-low text-on-surface font-body-sm text-body-sm px-space-sm py-2 rounded-none custom-input border border-transparent focus:border-primary transition-colors" id="shipping-postal-code" name="postal-code" placeholder="PIN / Postal Code *" required="" type="text" value="110021"/>
+</div>
+</div>
+<div>
+<label class="sr-only" for="shipping-tel">Private Telephone (+91)</label>
+<input autocomplete="shipping tel" class="w-full bg-surface-container-low text-on-surface font-body-sm text-body-sm px-space-sm py-2 rounded-none custom-input border border-transparent focus:border-primary transition-colors" id="shipping-tel" name="tel" placeholder="Private Telephone (+91) *" required="" type="tel" value="+91 98100 23456"/>
+</div>
+</div>
+</div>
+<!-- Shipping Method Selection -->
+<div>
+<span class="font-label-md text-label-md text-primary uppercase tracking-wider font-semibold block mb-1">Transit &amp; Insurance Protocol</span>
+<div class="bg-surface-container-low p-space-sm flex items-center justify-between border-l-4 border-secondary transition-all hover:bg-surface-container cursor-pointer">
+<div class="flex items-center gap-space-sm">
+<div class="w-4 h-4 rounded-full bg-secondary flex items-center justify-center shadow-sm">
+<div class="w-1.5 h-1.5 rounded-full bg-on-secondary"></div>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<p class="font-title-md text-title-md text-primary leading-tight">Bespoke Insured Royal Courier</p>
+<span class="inline-block w-2 h-2 rounded-full bg-secondary animate-pulse" title="Loom transit live status"></span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">DHL Express / BlueDart Apex • Fully Insured Diplomatic Transit</p>
+</div>
+</div>
+<span class="font-label-md text-label-md text-secondary font-bold uppercase tracking-wider bg-secondary/10 px-2 py-0.5 rounded">FREE</span>
+</div>
+</div>
+<!-- Atelier Promo / Troussseau Code with Micro-interaction -->
+<div class="flex flex-col gap-1">
+<div class="flex gap-space-xs relative">
+<input class="flex-grow bg-surface-container-low text-on-surface font-body-sm text-body-sm px-space-sm py-2 rounded-none uppercase placeholder:normal-case custom-input" id="promo-input" placeholder="Privilege Code / Gift Certificate" type="text"/>
+<button class="bg-surface-container px-space-md py-2 font-label-md text-label-md text-primary uppercase tracking-wider hover:bg-primary hover:text-tertiary-fixed transition-all relative overflow-hidden active:scale-95 shimmer-btn" id="promo-btn" onclick="applyPrivilegeCode()" type="button">
+<span id="promo-btn-text">Apply</span>
+</button>
+</div>
+<div class="hidden text-secondary font-label-sm text-label-sm tracking-wider uppercase flex items-center gap-1 mt-1 transition-all" id="promo-success-badge">
+<span class="material-symbols-outlined text-sm">verified</span>
+    Privilege Weave Discount Applied (₹15,000 Off)
+  </div>
+</div>
+<!-- Price Breakdown Calculation -->
+<div class="bg-surface-container-low p-space-md flex flex-col gap-space-xs font-body-sm text-body-sm border border-surface-container">
+<div class="flex justify-between text-on-surface-variant">
+<span id="summary-subtotal-label">Subtotal (2 Heirloom Weaves)</span>
+<span class="font-title-md text-title-md text-on-surface transition-all duration-300" id="summary-subtotal">₹2,43,000</span>
+</div>
+<div class="hidden justify-between text-secondary" id="discount-row">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-xs">local_activity</span> Royal Patron Privilege</span>
+<span class="font-title-md text-title-md font-semibold">-₹15,000</span>
+</div>
+<div class="flex justify-between text-on-surface-variant">
+<span>Hardwood Keepsake Atelier Packaging</span>
+<span class="text-secondary font-semibold uppercase tracking-wider">Complimentary</span>
+</div>
+<div class="flex justify-between text-on-surface-variant">
+<span>Hand-Stitched Fall &amp; Pico Service</span>
+<span class="text-secondary font-semibold uppercase tracking-wider">Included</span>
+</div>
+<div class="flex justify-between text-on-surface-variant">
+<span>Worldwide Insured Transit &amp; Handling</span>
+<span class="text-secondary font-semibold uppercase tracking-wider">Complimentary</span>
+</div>
+<div class="flex justify-between text-on-surface-variant">
+<span>Applicable Handloom GST (12%)</span>
+<span>Included in Price</span>
+</div>
+<div class="h-px bg-surface-container my-1"></div>
+<div class="flex justify-between items-baseline pt-1">
+<div class="flex flex-col">
+<span class="font-title-md text-title-md text-primary font-bold">Total Payable</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Includes all luxury duties &amp; insurance</span>
+</div>
+<span aria-atomic="true" aria-live="polite" class="font-headline-sm text-headline-sm text-primary font-bold transition-all duration-300" id="summary-total" role="status">₹2,43,000</span>
+</div>
+</div>
+<!-- Primary Royal Order CTA with Gold Sweep & Turn Lock -->
+<div class="flex flex-col gap-space-xs pt-1">
+<button class="w-full bg-primary-container hover:bg-primary text-tertiary-fixed font-label-md text-label-md uppercase tracking-widest py-4 px-space-md text-center shadow-xl transition-all duration-300 flex items-center justify-center gap-space-sm group shimmer-btn active:scale-[0.98] border border-tertiary-fixed/30 cursor-pointer" id="complete-order-btn" onclick="completeRoyalOrder()" type="button">
+<span class="material-symbols-outlined text-xl transition-transform duration-500 group-hover:rotate-180 text-tertiary-fixed">lock</span>
+<span class="tracking-widest font-bold">Complete Royal Order • Secure Loom</span>
+</button>
+<div class="flex items-center justify-center gap-space-md py-space-xs text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-xs">lock</span> 256-Bit Bank Encryption</span>
+<span>•</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-xs">verified_user</span> Authenticity Escrow</span>
+</div>
+</div>
+</form>
+</div>
+<!-- Concierge Trust & Private Bridal Assistance Card with Avatar Ping -->
+<div class="bg-surface-container-low p-space-md flex items-center justify-between shadow-sm border border-surface-container luxury-card group">
+<div class="flex items-center gap-space-sm">
+<div class="relative">
+<span class="material-symbols-outlined text-secondary text-2xl transition-transform duration-300 group-hover:scale-110">support_agent</span>
+<span class="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-secondary animate-ping"></span>
+</div>
+<div>
+<p class="font-title-md text-title-md text-primary">Need Troussseau Assistance?</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Our private salon draping masters are active.</p>
+</div>
+</div>
+<a class="bg-secondary text-on-secondary font-label-sm text-label-sm uppercase tracking-wider px-space-sm py-2 flex items-center gap-1 hover:brightness-110 active:scale-95 transition-all shadow-sm group/btn" href="https://wa.me/919810023456" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-sm transition-transform duration-300 group-hover/btn:rotate-12">chat</span> WhatsApp Stylist
+          </a>
+</div>
+</div>
+</div>
+<!-- Undo Notification Toast -->
+<div class="fixed bottom-6 right-6 z-50 transform translate-y-32 opacity-0 transition-all duration-300 pointer-events-none" id="undo-toast">
+<div class="bg-inverse-surface text-inverse-on-surface px-space-md py-space-sm shadow-2xl flex items-center gap-space-md border-l-4 border-tertiary-fixed-dim pointer-events-auto">
+<div class="flex flex-col">
+<span class="font-title-md text-sm font-semibold" id="undo-toast-text">Saree removed from your Atelier Loom</span>
+<span class="font-label-sm text-[10px] text-surface-container-high">Tap undo to restore your loom reservation</span>
+</div>
+<button class="text-tertiary-fixed font-label-md uppercase tracking-wider font-bold hover:underline transition-all px-2 py-1" onclick="undoRemoval()" type="button">Undo</button>
+</div>
+</div>
+<!-- Client-Side Interactive Logic -->
+<script>
+      // Active Ticking Countdown Timer
+      let totalSeconds = 18 * 60 + 42;
+      const timerEl = document.getElementById('countdown-timer');
+
+      function updateTimer() {
+        if (!timerEl) return;
+        const minutes = Math.floor(totalSeconds / 60);
+        const seconds = totalSeconds % 60;
+        timerEl.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+        if (totalSeconds > 0) {
+          totalSeconds--;
+        } else {
+          timerEl.textContent = "00:00";
+        }
+      }
+      setInterval(updateTimer, 1000);
+
+      // Saree Item State
+      let removedItemData = null;
+      let privilegeDiscount = 0;
+
+      // Toggle Royal Calligraphy Gift Note
+      function toggleGiftCard() {
+        const field = document.getElementById('gift-card-field');
+        if (field) {
+          if (field.classList.contains('hidden')) {
+            field.classList.remove('hidden');
+            const seal = document.getElementById('wax-seal-badge');
+            if (seal) {
+              seal.style.animation = 'stampSeal 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+            }
+          } else {
+            field.classList.add('hidden');
+          }
+        }
+      }
+
+      function reStampSeal() {
+        const seal = document.getElementById('wax-seal-badge');
+        if (seal) {
+          seal.style.animation = 'none';
+          void seal.offsetWidth; // trigger reflow
+          seal.style.animation = 'stampSeal 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+        }
+      }
+
+      // Packaging Selection Toggle
+      function togglePackagingSelect(card) {
+        const badge = card.querySelector('.material-symbols-outlined');
+        const badgeContainer = badge.parentElement;
+        const label = card.querySelector('.font-label-sm');
+        
+        const isSelected = card.classList.contains('ring-secondary/20');
+        if (isSelected) {
+          card.classList.remove('ring-secondary/20', 'border-tertiary-fixed-dim/40');
+          card.classList.add('border-outline-variant/30', 'opacity-70');
+          badgeContainer.classList.add('bg-outline-variant');
+          badgeContainer.classList.remove('bg-secondary');
+          label.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-outline"></span> Optional Free';
+          label.classList.remove('text-secondary');
+          label.classList.add('text-on-surface-variant');
+        } else {
+          card.classList.add('ring-secondary/20', 'border-tertiary-fixed-dim/40');
+          card.classList.remove('border-outline-variant/30', 'opacity-70');
+          badgeContainer.classList.remove('bg-outline-variant');
+          badgeContainer.classList.add('bg-secondary');
+          badge.style.animation = 'numFlip 0.3s ease';
+          label.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> Selected Free';
+          label.classList.add('text-secondary');
+          label.classList.remove('text-on-surface-variant');
+        }
+      }
+
+      // Trousseau Wishlist Micro-Interaction
+      function toggleTrousseauWish(btn) {
+        const icon = btn.querySelector('.trousseau-icon');
+        const label = btn.querySelector('.trousseau-label');
+        if (!icon) return;
+
+        const isFilled = icon.style.fontVariationSettings && icon.style.fontVariationSettings.includes("'FILL' 1");
+        if (!isFilled) {
+          icon.style.fontVariationSettings = "'FILL' 1";
+          icon.classList.add('text-primary');
+          icon.classList.add('scale-125');
+          if (label) label.textContent = 'Saved in Trousseau';
+          setTimeout(() => icon.classList.remove('scale-125'), 250);
+        } else {
+          icon.style.fontVariationSettings = "'FILL' 0";
+          icon.classList.remove('text-primary');
+          if (label) label.textContent = 'Save for Trousseau';
+        }
+      }
+
+      // Quantity Adjuster with Smooth Number Pop & Line Price Calculation
+      function adjustQty(elementId, change, basePrice, priceElementId) {
+        const qtyEl = document.getElementById(elementId);
+        if (!qtyEl) return;
+        let current = parseInt(qtyEl.innerText) || 1;
+        current += change;
+        if (current < 1) current = 1;
+        if (current > 5) current = 5;
+        
+        qtyEl.classList.remove('num-animate');
+        void qtyEl.offsetWidth; // Reflow
+        qtyEl.innerText = current;
+        qtyEl.classList.add('num-animate');
+
+        if (priceElementId) {
+          const priceEl = document.getElementById(priceElementId);
+          if (priceEl) {
+            priceEl.innerText = '₹' + (current * basePrice).toLocaleString('en-IN');
+            priceEl.classList.remove('num-animate');
+            void priceEl.offsetWidth;
+            priceEl.classList.add('num-animate');
+          }
+        }
+        recalculateTotals();
+      }
+
+      // Remove with Undo Toast Notification
+      function removeItem(itemId, itemName) {
+        const itemEl = document.getElementById(itemId);
+        if (itemEl) {
+          // Store for undo
+          removedItemData = {
+            id: itemId,
+            parent: itemEl.parentNode,
+            nextSibling: itemEl.nextSibling,
+            element: itemEl
+          };
+
+          itemEl.style.transition = 'all 0.35s cubic-bezier(0.4, 0, 0.2, 1)';
+          itemEl.style.opacity = '0';
+          itemEl.style.transform = 'translateX(-30px)';
+          
+          setTimeout(() => {
+            itemEl.style.display = 'none';
+            recalculateTotals();
+            showUndoToast(`${itemName || 'Masterpiece'} preserved in wishlist archive.`);
+          }, 350);
+        }
+      }
+
+      function showUndoToast(msg) {
+        const toast = document.getElementById('undo-toast');
+        const text = document.getElementById('undo-toast-text');
+        if (toast && text) {
+          text.textContent = msg;
+          toast.classList.remove('translate-y-32', 'opacity-0');
+          toast.classList.add('translate-y-0', 'opacity-100');
+          
+          clearTimeout(window.toastTimer);
+          window.toastTimer = setTimeout(() => {
+            toast.classList.add('translate-y-32', 'opacity-0');
+            toast.classList.remove('translate-y-0', 'opacity-100');
+          }, 6000);
+        }
+      }
+
+      function undoRemoval() {
+        if (removedItemData && removedItemData.element) {
+          const el = removedItemData.element;
+          el.style.display = '';
+          setTimeout(() => {
+            el.style.opacity = '1';
+            el.style.transform = 'translateX(0)';
+          }, 10);
+          removedItemData = null;
+          recalculateTotals();
+
+          const toast = document.getElementById('undo-toast');
+          if (toast) {
+            toast.classList.add('translate-y-32', 'opacity-0');
+            toast.classList.remove('translate-y-0', 'opacity-100');
+          }
+        }
+      }
+
+      // Privilege Code Micro-interaction
+      function applyPrivilegeCode() {
+        const input = document.getElementById('promo-input');
+        const badge = document.getElementById('promo-success-badge');
+        const discountRow = document.getElementById('discount-row');
+        const btn = document.getElementById('promo-btn');
+        const btnText = document.getElementById('promo-btn-text');
+
+        if (input && input.value.trim().length > 0) {
+          btnText.textContent = 'Applying...';
+          btn.classList.add('opacity-75');
+
+          setTimeout(() => {
+            privilegeDiscount = 15000;
+            if (badge) badge.classList.remove('hidden');
+            if (discountRow) discountRow.classList.remove('hidden');
+            discountRow.classList.add('flex');
+            btnText.textContent = 'Applied';
+            btn.classList.remove('opacity-75');
+            btn.classList.add('bg-secondary', 'text-on-secondary');
+            recalculateTotals();
+          }, 450);
+        } else {
+          input.focus();
+          input.classList.add('border-error');
+          setTimeout(() => input.classList.remove('border-error'), 1200);
+        }
+      }
+
+      // Express Checkout Select Indicator
+      function selectExpress(btn, type) {
+        btn.classList.add('ring-2', 'ring-tertiary-fixed');
+        setTimeout(() => {
+          btn.classList.remove('ring-2', 'ring-tertiary-fixed');
+        }, 300);
+      }
+
+      function recalculateTotals() {
+        let total = 0;
+        let count = 0;
+        const q1El = document.getElementById('item-1-qty');
+        const q2El = document.getElementById('item-2-qty');
+        const item1 = document.getElementById('cart-item-1');
+        const item2 = document.getElementById('cart-item-2');
+        
+        if (q1El && item1 && item1.style.display !== 'none') {
+          const q = parseInt(q1El.innerText) || 1;
+          total += q * 145000;
+          count += q;
+        }
+        if (q2El && item2 && item2.style.display !== 'none') {
+          const q = parseInt(q2El.innerText) || 1;
+          total += q * 98000;
+          count += q;
+        }
+
+        const subtotalEl = document.getElementById('summary-subtotal');
+        const totalEl = document.getElementById('summary-total');
+        const subtotalLabel = document.getElementById('summary-subtotal-label');
+        const countLabel = document.getElementById('cart-item-count-label');
+        const badgeCount = document.getElementById('cart-counter-badge');
+
+        if (subtotalLabel) {
+          subtotalLabel.textContent = `Subtotal (${count} Heirloom ${count === 1 ? 'Weave' : 'Weaves'})`;
+        }
+        if (countLabel) {
+          countLabel.textContent = `${count} ${count === 1 ? 'Masterpiece' : 'Masterpieces'}`;
+        }
+        if (badgeCount) {
+          badgeCount.textContent = count;
+        }
+
+        const subtotalFormatted = '₹' + total.toLocaleString('en-IN');
+        const finalTotal = Math.max(0, total - privilegeDiscount);
+        const totalFormatted = '₹' + finalTotal.toLocaleString('en-IN');
+
+        if (subtotalEl) {
+          subtotalEl.innerText = subtotalFormatted;
+          subtotalEl.classList.remove('num-animate');
+          void subtotalEl.offsetWidth;
+          subtotalEl.classList.add('num-animate');
+        }
+        if (totalEl) {
+          totalEl.innerText = totalFormatted;
+          totalEl.classList.remove('num-animate');
+          void totalEl.offsetWidth;
+          totalEl.classList.add('num-animate');
+        }
+      }
+
+      function completeRoyalOrder() {
+        const form = document.getElementById('checkout-form');
+        if (form && !form.checkValidity()) {
+          form.reportValidity();
+          return;
+        }
+
+        const btn = document.getElementById('complete-order-btn');
+        if (btn) {
+          btn.innerHTML = `<span class="material-symbols-outlined text-xl animate-spin">rotate_right</span><span>Reserving Royal Heirloom Looms...</span>`;
+          btn.classList.add('opacity-90');
+        }
+        setTimeout(() => {
+          alert('Your royal heirloom order has been respectfully received. Our master archivist is preparing the authenticity dossier and hand-carved hardwood casket.');
+          if (btn) {
+            btn.innerHTML = `<span class="material-symbols-outlined text-xl">verified</span><span>Loom Secured • Order Sealed</span>`;
+            btn.classList.remove('opacity-90');
+          }
+        }, 750);
+      }
+
+      // Mobile Nav Drawer
+      const mobileNavDrawer = document.getElementById('mobile-nav-drawer');
+      const mobileNavToggle = document.getElementById('mobile-nav-toggle');
+      const mobileNavClose = document.getElementById('mobile-nav-close');
+
+      if (mobileNavToggle && mobileNavDrawer) {
+        mobileNavToggle.addEventListener('click', () => {
+          mobileNavDrawer.showModal();
+          mobileNavToggle.setAttribute('aria-expanded', 'true');
+        });
+        mobileNavClose?.addEventListener('click', () => mobileNavDrawer.close());
+        mobileNavDrawer.addEventListener('close', () => {
+          mobileNavToggle.setAttribute('aria-expanded', 'false');
+          mobileNavToggle.focus();
+        });
+        mobileNavDrawer.addEventListener('click', (e) => {
+          const rect = mobileNavDrawer.getBoundingClientRect();
+          if (e.clientX < rect.left || e.clientX > rect.right || e.clientY < rect.top || e.clientY > rect.bottom) {
+            mobileNavDrawer.close();
+          }
+        });
+      }
+    </script>
+</div>
+</div></main><footer class="w-full bg-surface-container-low mt-space-xl"><div class="max-w-[1440px] mx-auto px-gutter-mobile lg:px-margin pt-space-xl pb-space-lg"><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-space-lg mb-space-xl"><div class="flex flex-col gap-space-sm"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-secondary text-headline-sm">verified</span><span class="font-label-md text-label-md text-primary uppercase tracking-widest font-bold">Silk Mark India Assured</span></div><p class="font-body-sm text-body-sm text-on-surface-variant">Every heirloom warp and weft is lab-tested and certified pure mulberry, tussar, and zari weaves, accompanied by our master artisan certificate of authenticity.</p><div class="pt-space-xs"><span class="inline-block bg-surface-container px-space-sm py-1 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">GI Tagged Provenance</span></div></div><div class="flex flex-col gap-space-sm"><h3 class="font-headline-sm text-headline-sm text-primary">Bespoke Bridal Salon</h3><p class="font-body-sm text-body-sm text-on-surface-variant">Schedule a private one-on-one virtual or in-person trousseau drape consultation with our royal couture archivists.</p><a class="inline-flex items-center gap-space-xs font-label-md text-label-md text-primary uppercase tracking-wider font-semibold hover:text-on-primary-container transition-colors" data-path="bridal-consultation" href="#">Book Atelier Private Drape<span class="material-symbols-outlined text-base">arrow_forward</span></a></div><div class="flex flex-col gap-space-sm"><h3 class="font-headline-sm text-headline-sm text-primary">Curated Collections</h3><ul class="flex flex-col gap-space-xs"><li role="none"><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="kanjeevaram-silks" href="#">Bridal Kanjeevaram Silks</a></li><li role="none"><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="banarasi-brocades" href="#">Varanasi Antique Jangla &amp; Shikargah</a></li><li role="none"><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="handloom-organza" href="#">Zardozi-Embroidered Sheer Organzas</a></li><li role="none"><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="heritage-weaves" href="#">Patan Patola &amp; Paithani Archives</a></li></ul></div><div class="flex flex-col gap-space-sm"><h3 class="font-headline-sm text-headline-sm text-primary">Private Previews</h3><p class="font-body-sm text-body-sm text-on-surface-variant">Receive sealed invitations to private weave debuts, trunk shows, and bespoke loom reservations.</p><form class="flex flex-col gap-space-xs"><input class="bg-surface-container-lowest px-space-sm py-2 text-on-surface font-body-sm text-body-sm rounded-none focus:outline-none custom-input" placeholder="Your Royal Dispatch Email" type="email"/><button class="bg-primary-container text-on-primary font-label-md text-label-md uppercase tracking-widest py-2 px-space-md hover:bg-primary transition-colors shimmer-btn" type="button">Request Gazette Access</button></form></div></div><div class="pt-space-lg flex flex-col md:flex-row items-center justify-between gap-space-md"><p class="font-body-sm text-body-sm text-on-surface-variant">© 2024 Kala Virasat Royal Handlooms. Crafted for Discerning Heirs &amp; Global Connoisseurs.</p><div class="flex flex-wrap items-center gap-space-md"><a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary uppercase tracking-wider transition-colors" data-path="custom-fall-pico-policy" href="#">Fall &amp; Pico Policy</a><a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary uppercase tracking-wider transition-colors" data-path="royal-trousseau-shipping" href="#">Complimentary Global Transit</a><a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary uppercase tracking-wider transition-colors" data-path="certificate-verification" href="#">Silk Mark Certificate</a><a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary uppercase tracking-wider transition-colors" data-path="terms-and-curation" href="#">Terms of Bespoke Curation</a></div></div></div></footer></body></html>
